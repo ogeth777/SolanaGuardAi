@@ -1,0 +1,48 @@
+{
+  "name": "solana-guard-ai",
+  "version": "0.1.0",
+  "description": "AI-powered token security scanner and risk analysis tool for Solana",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [
+    "solana",
+    "blockchain",
+    "security",
+    "ai",
+    "scanner",
+    "token",
+    "defi"
+  ],
+  "author": "Solana Guard Team",
+  "license": "MIT",
+  "dependencies": {
+    "@metaplex-foundation/mpl-token-metadata": "^3.4.0",
+    "@metaplex-foundation/umi": "^1.4.1",
+    "@metaplex-foundation/umi-bundle-defaults": "^1.4.1",
+    "@solana/web3.js": "^1.89.1",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.309.0",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "recharts": "^3.7.0",
+    "tailwind-merge": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}
