@@ -329,7 +329,7 @@ function TokenAnalysis({ result }: { result: any }) {
                                <Tooltip 
                                   contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px', fontSize: '12px' }}
                                   itemStyle={{ color: '#94a3b8' }}
-                                  formatter={(value: number) => `${value.toFixed(2)}%`}
+                                  formatter={(value: any) => `${Number(value).toFixed(2)}%`}
                                />
                              </PieChart>
                         </ResponsiveContainer>
