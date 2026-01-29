@@ -19,6 +19,10 @@ The Solana ecosystem is fast-moving, but this speed comes with risks. Scammers o
 
 **Solana Guard AI** automates the due diligence process, checking these invisible risks in seconds so you can trade with confidence.
 
+## 🛡️ Mission
+
+> "I built Solana Guard AI because I believe safety shouldn't be a luxury. In the wild west of crypto, it's easy to get burned. I wanted to create a free, powerful tool that gives every user the same level of security analysis as the pros." — *Developer*
+
 ## 🚀 Features
 
 - **AI Risk Analysis**: Generates human-readable risk summaries using advanced heuristics.

@@ -74,6 +74,23 @@ export default function Home() {
                     </div>
                 </div>
 
+                <div className="mt-4 p-4 bg-gradient-to-r from-slate-900 to-slate-900/50 rounded-xl border border-slate-800 relative group">
+                    <div className="flex items-start gap-3">
+                        <div className="p-2 bg-[#14F195]/10 rounded-lg border border-[#14F195]/20">
+                             <Heart className="w-5 h-5 text-[#14F195]" />
+                        </div>
+                        <div>
+                            <h3 className="text-sm font-bold text-white mb-1">Developer's Mission</h3>
+                            <p className="text-xs text-slate-400 leading-relaxed">
+                                I created this platform with one goal: <strong>User Safety</strong>. 
+                                Too many traders lose funds to hidden risks like honeypots and rug pulls. 
+                                Solana Guard AI exists to make professional-grade security analysis accessible to everyone. 
+                                <span className="text-slate-300 block mt-1">Always check before you trade. Stay safe. 🛡️</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <p className="text-slate-400 text-sm">Paste a token address below to start analyzing.</p>
             </div>
         ),
