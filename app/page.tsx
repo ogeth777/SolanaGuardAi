@@ -69,7 +69,7 @@ export default function Home() {
                         </div>
                         <div className="flex gap-2">
                             <Users className="w-3 h-3 text-blue-400 flex-shrink-0 mt-0.5" />
-                            <span><strong>Holder Analysis:</strong> Ensure supply isn't controlled by a few wallets.</span>
+                            <span><strong>Holder Analysis:</strong> Ensure supply isn&apos;t controlled by a few wallets.</span>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ export default function Home() {
                              <Heart className="w-5 h-5 text-[#14F195]" />
                         </div>
                         <div>
-                            <h3 className="text-sm font-bold text-white mb-1">Developer's Mission</h3>
+                            <h3 className="text-sm font-bold text-white mb-1">Developer&apos;s Mission</h3>
                             <p className="text-xs text-slate-400 leading-relaxed">
                                 I created this platform with one goal: <strong>User Safety</strong>. 
                                 Too many traders lose funds to hidden risks like honeypots and rug pulls. 
