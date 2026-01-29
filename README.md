@@ -15,7 +15,7 @@ Solana Guard AI is a powerful, real-time security analysis tool designed to help
   - Metadata Immutability
   - Top Holder concentration
 - **Visual Risk Score**: Easy-to-understand 0-100 safety score.
-- **Whale Tracking**: Visualizes token distribution among top holders.
+- **Top Holder Analysis**: Checks for high concentration and potential whale manipulation.
 - **Cyberpunk UI**: A modern, responsive interface built for the Solana ecosystem.
 
 ## 🛠️ Tech Stack
