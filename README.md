@@ -10,6 +10,15 @@ Solana Guard AI is a powerful, real-time security analysis tool designed to help
 
 ![Solana Guard AI](https://placehold.co/1200x600/1e293b/06b6d4?text=Solana+Guard+AI+Preview)
 
+## ❓ Why Solana Guard AI?
+
+The Solana ecosystem is fast-moving, but this speed comes with risks. Scammers often exploit:
+- **Mint Authority**: Printing infinite tokens to dump on buyers.
+- **Freeze Authority**: Locking users' funds so they can't sell.
+- **Fake Volume**: Creating artificial activity to lure investors.
+
+**Solana Guard AI** automates the due diligence process, checking these invisible risks in seconds so you can trade with confidence.
+
 ## 🚀 Features
 
 - **AI Risk Analysis**: Generates human-readable risk summaries using advanced heuristics.

@@ -56,6 +56,24 @@ export default function Home() {
                     <div className="flex items-center gap-2 text-xs text-slate-400"><Activity className="w-3 h-3 text-[#14F195]" /> Rug Pull Detection</div>
                 </div>
 
+                <div className="mt-4 p-4 bg-slate-900/40 rounded-xl border border-slate-800/50 text-left">
+                    <h3 className="text-sm font-bold text-slate-300 mb-2">Why Token Security Matters</h3>
+                    <div className="space-y-2 text-xs text-slate-400">
+                        <div className="flex gap-2">
+                            <AlertTriangle className="w-3 h-3 text-yellow-500 flex-shrink-0 mt-0.5" />
+                            <span><strong>Avoid Rug Pulls:</strong> Detect if developers can mint infinite tokens or freeze your funds.</span>
+                        </div>
+                        <div className="flex gap-2">
+                            <CheckCircle className="w-3 h-3 text-[#14F195] flex-shrink-0 mt-0.5" />
+                            <span><strong>Verify Legitimacy:</strong> Tokens listed on CoinMarketCap & CoinGecko are more likely to be safe.</span>
+                        </div>
+                        <div className="flex gap-2">
+                            <Users className="w-3 h-3 text-blue-400 flex-shrink-0 mt-0.5" />
+                            <span><strong>Holder Analysis:</strong> Ensure supply isn't controlled by a few wallets.</span>
+                        </div>
+                    </div>
+                </div>
+
                 <p className="text-slate-400 text-sm">Paste a token address below to start analyzing.</p>
             </div>
         ),
