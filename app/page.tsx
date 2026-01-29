@@ -38,6 +38,24 @@ export default function Home() {
             <div className="space-y-2">
                 <p>Hello! I am <span className="text-[#14F195] font-bold">Solana Guard AI</span>.</p>
                 <p>I can audit any Solana token for security risks, honeypots, and whale manipulation.</p>
+                <div className="flex flex-wrap gap-2 py-1">
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800/50 border border-slate-700/50 text-xs font-medium text-slate-300">
+                        <img src="/CoinMarketCap.jpg" alt="CMC" className="w-4 h-4 rounded-full" />
+                        <span>Verified by CoinMarketCap</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800/50 border border-slate-700/50 text-xs font-medium text-slate-300">
+                        <img src="/CoinGecko.jpg" alt="CG" className="w-4 h-4 rounded-full" />
+                        <span>Verified by CoinGecko</span>
+                    </div>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 pb-1">
+                    <div className="flex items-center gap-2 text-xs text-slate-400"><Shield className="w-3 h-3 text-[#14F195]" /> Mint Authority Analysis</div>
+                    <div className="flex items-center gap-2 text-xs text-slate-400"><Lock className="w-3 h-3 text-[#14F195]" /> Liquidity Lock Check</div>
+                    <div className="flex items-center gap-2 text-xs text-slate-400"><Users className="w-3 h-3 text-[#14F195]" /> Top Holders Scan</div>
+                    <div className="flex items-center gap-2 text-xs text-slate-400"><Activity className="w-3 h-3 text-[#14F195]" /> Rug Pull Detection</div>
+                </div>
+
                 <p className="text-slate-400 text-sm">Paste a token address below to start analyzing.</p>
             </div>
         ),
@@ -201,8 +219,24 @@ export default function Home() {
                     <Twitter className="w-4 h-4 text-[#14F195] drop-shadow-[0_0_5px_rgba(20,241,149,0.8)]" /> Twitter
                 </a>
              </div>
-             <div className="text-xs text-[#9945FF] font-medium drop-shadow-[0_0_5px_rgba(153,69,255,0.6)]">
-                Solana Guard AI can make mistakes. Always DYOR.
+             <div className="flex flex-col items-end gap-1">
+                <div className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity mb-1">
+                    <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Built on</span>
+                    <a href="https://x.com/solana" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-black/40 px-2 py-1 rounded border border-slate-800/50 hover:bg-black/60 hover:border-[#14F195]/30 transition-all">
+                        <img src="/logos/sol.png" alt="Solana" className="w-3.5 h-3.5" />
+                        <span className="text-[10px] font-bold text-slate-300">Solana</span>
+                    </a>
+                </div>
+                <div className="flex items-center gap-2 text-[10px] text-slate-400 uppercase tracking-wider font-bold">
+                    <div className="flex gap-1.5">
+                        <img src="/CoinMarketCap.jpg" alt="CMC" className="w-4 h-4 rounded-full ring-1 ring-slate-700" />
+                        <img src="/CoinGecko.jpg" alt="CG" className="w-4 h-4 rounded-full ring-1 ring-slate-700" />
+                    </div>
+                    <span>CoinMarketCap & CoinGecko Verified</span>
+                </div>
+                <div className="text-xs text-[#9945FF] font-medium drop-shadow-[0_0_5px_rgba(153,69,255,0.6)]">
+                    Solana Guard AI can make mistakes. Always DYOR.
+                </div>
              </div>
         </div>
       </div>
@@ -213,6 +247,8 @@ export default function Home() {
 // ----------------------------------------------------------------------
 // SUB-COMPONENTS
 // ----------------------------------------------------------------------
+
+
 
 function TypewriterEffect({ text }: { text: string }) {
   const [displayedText, setDisplayedText] = useState('');
@@ -405,22 +441,7 @@ function TokenAnalysis({ result }: { result: any }) {
                         <CheckItem label="Immutable" status={result.checks.metadataImmutable} description="Token metadata cannot be changed" />
                         <CheckItem label="Not Honeypot" status={!result.isHoneypot} description="Token can be sold freely" />
                     </div>
-                    
-                    {/* Risk Score Card */}
-                    <div className="mt-4 bg-slate-900/50 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
-                         <span className="text-slate-400 font-bold text-sm">Profile Score</span>
-                         <div className="flex items-center gap-3">
-                             <div className="w-32 h-2 bg-slate-800 rounded-full overflow-hidden">
-                                 <div 
-                                    className={clsx("h-full rounded-full transition-all duration-500", result.riskScore > 50 ? "bg-red-500" : "bg-[#14F195]")}
-                                    style={{ width: `${100 - result.riskScore}%` }}
-                                 ></div>
-                             </div>
-                             <span className={clsx("font-bold", result.riskScore > 50 ? "text-red-500" : "text-[#14F195]")}>
-                                 {100 - result.riskScore}%
-                             </span>
-                         </div>
-                    </div>
+
                 </div>
             </div>
 
