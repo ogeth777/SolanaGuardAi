@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "AI-powered token security scanner and risk analysis tool for Solana",
   "private": true,
+  "engines": {
+    "node": ">=18.17.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

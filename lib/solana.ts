@@ -5,9 +5,10 @@ import { publicKey } from '@metaplex-foundation/umi';
 
 // List of public RPC endpoints to try
 const RPC_ENDPOINTS = [
+  process.env.NEXT_PUBLIC_SOLANA_RPC_URL, // Allow custom RPC via Env Var
   "https://api.mainnet-beta.solana.com",
   "https://solana-rpc.publicnode.com",
-];
+].filter(Boolean) as string[];
 
 // Known Burn Addresses
 const BURN_ADDRESSES = [
@@ -24,6 +25,9 @@ export interface MarketData {
   priceUsd: number;
   liquidityUsd: number;
   fdv: number;
+  marketCap?: number;
+  circulatingSupply?: number;
+  volToMktCap?: number;
   pairAddress: string;
   dexId: string;
   volume24h: number;
@@ -31,6 +35,9 @@ export interface MarketData {
   socials: { type: string; url: string }[];
   buys24h: number;
   sells24h: number;
+  priceChange24h: number;
+  externalUrl?: string; // CMC or CoinGecko URL
+  searchUrl?: string; // Fallback search URL for high-value tokens
 }
 
 export interface SecurityReport {
@@ -51,7 +58,7 @@ export interface SecurityReport {
   verdict: string;
 }
 
-async function getDexScreenerData(tokenAddress: string): Promise<MarketData | null> {
+export async function getDexScreenerData(tokenAddress: string): Promise<MarketData | null> {
   try {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), 5000); // 5s timeout
@@ -66,23 +73,78 @@ async function getDexScreenerData(tokenAddress: string): Promise<MarketData | nu
     const data = await res.json();
     if (!data.pairs || data.pairs.length === 0) return null;
 
-    // Get the most liquid pair
-    const pair = data.pairs.sort((a: any, b: any) => b.liquidity?.usd - a.liquidity?.usd)[0];
+    // 1. Try to find pairs where our token is the BASE token
+    let bestPair = data.pairs
+        .filter((p: any) => p.baseToken.address === tokenAddress)
+        .sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
+
+    // 2. If no base pair found, fallback to any pair (likely our token is Quote)
+    if (!bestPair) {
+        bestPair = data.pairs.sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
+    }
+    
+    if (!bestPair) return null;
+
+    const isBase = bestPair.baseToken.address === tokenAddress;
+    const targetToken = isBase ? bestPair.baseToken : bestPair.quoteToken;
+    
+    // Calculate price
+    let price = 0;
+    if (isBase) {
+        price = parseFloat(bestPair.priceUsd || "0");
+    } else {
+        // We are quote. Price = priceUsd / priceNative
+        const pUsd = parseFloat(bestPair.priceUsd || "0");
+        const pNative = parseFloat(bestPair.priceNative || "0");
+        if (pNative > 0) {
+            price = pUsd / pNative;
+        }
+    }
+
+    // Find external links (CMC or CoinGecko) from any pair
+    let externalUrl: string | undefined;
+    let searchUrl: string | undefined;
+    
+    // Check all pairs for info links
+    for (const pair of data.pairs) {
+        if (pair.info?.websites) {
+            const cmc = pair.info.websites.find((w: any) => w.url.includes('coinmarketcap.com'));
+            const cg = pair.info.websites.find((w: any) => w.url.includes('coingecko.com'));
+            
+            if (cmc) {
+                externalUrl = cmc.url;
+                break; // Prioritize CMC and stop
+            }
+            if (cg && !externalUrl) {
+                externalUrl = cg.url;
+                // Continue searching for CMC just in case
+            }
+        }
+    }
+
+    // Fallback: If no explicit link, but Liquidity > $1k, provide a Google Search link for CMC
+    // This helps users find info even for smaller tokens
+    if (!externalUrl && (bestPair.liquidity?.usd || 0) > 1000) {
+        searchUrl = `https://www.google.com/search?q=site:coinmarketcap.com+${targetToken.name}+${targetToken.symbol}+crypto`;
+    }
 
     return {
-      name: pair.baseToken.name,
-      symbol: pair.baseToken.symbol,
-      imageUrl: pair.info?.imageUrl,
-      priceUsd: parseFloat(pair.priceUsd),
-      liquidityUsd: pair.liquidity?.usd || 0,
-      fdv: pair.fdv || 0,
-      pairAddress: pair.pairAddress,
-      dexId: pair.dexId,
-      volume24h: pair.volume?.h24 || 0,
-      websites: pair.info?.websites || [],
-      socials: pair.info?.socials || [],
-      buys24h: pair.txns?.h24?.buys || 0,
-      sells24h: pair.txns?.h24?.sells || 0
+      name: targetToken.name,
+      symbol: targetToken.symbol,
+      imageUrl: bestPair.info?.imageUrl,
+      priceUsd: price,
+      liquidityUsd: bestPair.liquidity?.usd || 0,
+      fdv: bestPair.fdv || 0,
+      pairAddress: bestPair.pairAddress,
+      dexId: bestPair.dexId,
+      volume24h: bestPair.volume?.h24 || 0,
+      websites: bestPair.info?.websites || [],
+      socials: bestPair.info?.socials || [],
+      buys24h: bestPair.txns?.h24?.buys || 0,
+      sells24h: bestPair.txns?.h24?.sells || 0,
+      priceChange24h: bestPair.priceChange?.h24 || 0,
+      externalUrl: externalUrl,
+      searchUrl: searchUrl
     };
   } catch (e) {
     console.warn("DexScreener fetch failed:", e);
@@ -185,6 +247,21 @@ export async function analyzeToken(tokenAddress: string): Promise<SecurityReport
     // 3. Get Market Data (DexScreener)
     console.log("Fetching market data...");
     const marketData = await getDexScreenerData(tokenAddress);
+
+    // Calculate Market Cap and Circulating Supply
+    if (marketData) {
+        // Calculate burned amount from top holders
+        const burnedAmount = topHolders
+            .filter(h => BURN_ADDRESSES.includes(h.address))
+            .reduce((acc, h) => acc + h.amount, 0);
+        
+        const circulatingSupply = supply - burnedAmount;
+        const marketCap = marketData.priceUsd * circulatingSupply;
+        
+        marketData.circulatingSupply = circulatingSupply;
+        marketData.marketCap = marketCap;
+        marketData.volToMktCap = marketCap > 0 ? marketData.volume24h / marketCap : 0;
+    }
 
     // 4. Get Metadata (Metaplex) for Mutable Check
     console.log("Fetching Metaplex metadata...");
