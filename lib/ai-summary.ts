@@ -39,7 +39,7 @@ export function generateRiskSummary(report: SecurityReport): string {
      else if (priceChange24h > 100) pros.push(`🚀 **Pump Alert:** Token is up ${priceChange24h.toFixed(1)}% in 24h.`);
 
      // Valuation Check
-     if (fdv > marketCap * 1.5) risks.push("Vest Schedule Warning: FDV is significantly higher than Market Cap. Large unlocks may dump price.");
+     if (marketCap && fdv > marketCap * 1.5) risks.push("Vest Schedule Warning: FDV is significantly higher than Market Cap. Large unlocks may dump price.");
   } else {
     risks.push("No liquidity found on major DEXes. Token might be unlisted or dead.");
   }
