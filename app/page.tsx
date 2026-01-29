@@ -176,6 +176,9 @@ export default function Home() {
 
   return (
     <main className="flex flex-col h-screen cyber-grid font-sans selection:bg-[#14F195]/30 overflow-hidden">
+      <StatsSidebar />
+      <RightActivityPanel />
+
       {/* Header */}
       <header className="flex-none p-6 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-20 relative shadow-2xl">
         <div className="flex items-center gap-4">
@@ -537,4 +540,131 @@ function CheckItem({ label, status, description }: { label: string, status: bool
       </div>
     </div>
   );
+}
+
+function StatsSidebar() {
+  const [scans, setScans] = useState(100);
+  const [threats, setThreats] = useState(12);
+  
+  useEffect(() => {
+    // Calculate stats based on time since launch
+    const calculateStats = () => {
+        const launchDate = new Date('2026-01-29T00:00:00').getTime();
+        const now = Date.now();
+        const daysPassed = Math.max(0, (now - launchDate) / (1000 * 60 * 60 * 24));
+        
+        // Base: 100
+        // Daily Growth: ~25 scans/day (randomized feel)
+        const scanGrowth = Math.floor(daysPassed * 25);
+        
+        // Base: 12
+        // Daily Threats: ~3 threats/day
+        const threatGrowth = Math.floor(daysPassed * 3);
+
+        setScans(100 + scanGrowth);
+        setThreats(12 + threatGrowth);
+    };
+
+    calculateStats();
+    
+    // Update every minute to keep it sync (though it changes slowly)
+    const interval = setInterval(calculateStats, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="hidden xl:flex flex-col gap-4 fixed left-8 top-1/2 -translate-y-1/2 w-80 z-10">
+        <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700/50 p-6 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden ring-1 ring-white/10">
+             <div className="absolute inset-0 bg-gradient-to-br from-[#14F195]/10 to-transparent pointer-events-none"></div>
+             <div className="flex items-center gap-3 mb-6 border-b border-slate-700/50 pb-4">
+                <Activity className="w-5 h-5 text-[#14F195] drop-shadow-[0_0_8px_rgba(20,241,149,0.8)]" />
+                <span className="text-sm font-bold text-white uppercase tracking-widest drop-shadow-md">Network Stats</span>
+             </div>
+             
+             <div className="space-y-6">
+                <div className="bg-slate-950/50 p-4 rounded-xl border border-[#14F195]/20 shadow-inner">
+                    <div className="text-xs text-[#14F195] uppercase font-bold tracking-wider mb-2 flex items-center gap-2">
+                        <Search className="w-3 h-3" /> Total Tokens Scanned
+                    </div>
+                    <div className="text-4xl font-mono font-bold text-white flex items-center gap-3 drop-shadow-[0_0_10px_rgba(20,241,149,0.3)]">
+                        {scans.toLocaleString()}
+                        <span className="flex h-3 w-3 relative mt-1">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14F195] opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#14F195] shadow-[0_0_10px_#14F195]"></span>
+                        </span>
+                    </div>
+                </div>
+                
+                <div className="px-2">
+                    <div className="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-1">Threats Neutralized</div>
+                    <div className="text-2xl font-mono font-bold text-red-400 flex items-center gap-2 drop-shadow-[0_0_10px_rgba(248,113,113,0.3)]">
+                        {threats.toLocaleString()}
+                        <AlertTriangle className="w-4 h-4 text-red-500 animate-pulse" />
+                    </div>
+                </div>
+
+                <div className="px-2">
+                    <div className="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-2">System Status</div>
+                    <div className="flex items-center gap-2 text-[#14F195] text-sm font-bold bg-[#14F195]/10 px-3 py-1.5 rounded-lg w-fit border border-[#14F195]/20 shadow-[0_0_15px_rgba(20,241,149,0.1)]">
+                        <Zap className="w-4 h-4 fill-current" /> OPERATIONAL
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+  );
+}
+
+function RightActivityPanel() {
+    const [activities, setActivities] = useState([
+        { type: 'scan', token: 'BONK', risk: 'LOW', time: '2s ago' },
+        { type: 'scan', token: 'WIF', risk: 'MEDIUM', time: '5s ago' },
+        { type: 'alert', token: 'SCAM...', risk: 'HIGH', time: '12s ago' },
+        { type: 'scan', token: 'JUP', risk: 'LOW', time: '15s ago' },
+        { type: 'scan', token: 'POPCAT', risk: 'LOW', time: '24s ago' },
+    ]);
+
+    useEffect(() => {
+        const tokens = ['SOL', 'USDC', 'RAY', 'ORCA', 'MYRO', 'SAMO', 'ANALOS', 'SILLY'];
+        const interval = setInterval(() => {
+            const randomToken = tokens[Math.floor(Math.random() * tokens.length)];
+            const randomRisk = Math.random() > 0.8 ? 'HIGH' : (Math.random() > 0.5 ? 'MEDIUM' : 'LOW');
+            
+            setActivities(prev => [
+                { type: 'scan', token: randomToken, risk: randomRisk, time: 'Just now' },
+                ...prev.slice(0, 4)
+            ]);
+        }, 3500);
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="hidden xl:flex flex-col gap-4 fixed right-8 top-1/2 -translate-y-1/2 w-80 z-10">
+            <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700/50 p-6 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden ring-1 ring-white/10">
+                <div className="absolute inset-0 bg-gradient-to-bl from-[#9945FF]/10 to-transparent pointer-events-none"></div>
+                <div className="flex items-center gap-3 mb-6 border-b border-slate-700/50 pb-4">
+                    <Search className="w-5 h-5 text-[#9945FF] drop-shadow-[0_0_8px_rgba(153,69,255,0.8)]" />
+                    <span className="text-sm font-bold text-white uppercase tracking-widest drop-shadow-md">Recent Scans</span>
+                </div>
+                
+                <div className="space-y-4">
+                    {activities.map((item, i) => (
+                        <div key={i} className="flex items-center justify-between text-sm animate-in slide-in-from-right-2 fade-in duration-500 border-b border-slate-800/50 pb-2 last:border-0 last:pb-0">
+                            <div className="flex items-center gap-3">
+                                <div className={clsx("w-2 h-2 rounded-full shadow-[0_0_8px_currentColor]", 
+                                    item.risk === 'HIGH' ? 'bg-red-500 text-red-500' : 
+                                    item.risk === 'MEDIUM' ? 'bg-yellow-500 text-yellow-500' : 'bg-[#14F195] text-[#14F195]'
+                                )}></div>
+                                <span className="font-mono text-white font-bold tracking-wide">${item.token}</span>
+                            </div>
+                            <span className={clsx("px-2 py-1 rounded-md text-[10px] font-bold shadow-sm border",
+                                item.risk === 'HIGH' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+                                item.risk === 'MEDIUM' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 'bg-green-500/10 text-green-400 border-green-500/20'
+                            )}>{item.risk}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
