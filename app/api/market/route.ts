@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDexScreenerData } from '@/lib/solana';
+import { getMarketData } from '@/lib/market';
 
 export async function GET(request: Request) {
   try {
@@ -10,7 +10,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Address is required' }, { status: 400 });
     }
 
-    const marketData = await getDexScreenerData(address);
+    const chain = address.startsWith('0x') ? 'base' : 'solana';
+    const marketData = await getMarketData(address, chain);
     
     if (!marketData) {
         return NextResponse.json({ error: 'Data not found' }, { status: 404 });

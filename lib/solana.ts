@@ -3,6 +3,9 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { fetchMetadata, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata';
 import { publicKey } from '@metaplex-foundation/umi';
 
+import { MarketData, SecurityReport } from './types';
+import { getMarketData } from './market';
+
 // List of public RPC endpoints to try
 const RPC_ENDPOINTS = [
   process.env.NEXT_PUBLIC_SOLANA_RPC_URL, // Allow custom RPC via Env Var
@@ -18,139 +21,7 @@ const BURN_ADDRESSES = [
   "0x000000000000000000000000000000000000dEaD" // Sometimes used in bridged tokens
 ];
 
-export interface MarketData {
-  name: string;
-  symbol: string;
-  imageUrl?: string;
-  priceUsd: number;
-  liquidityUsd: number;
-  fdv: number;
-  marketCap?: number;
-  circulatingSupply?: number;
-  volToMktCap?: number;
-  pairAddress: string;
-  dexId: string;
-  volume24h: number;
-  websites: { label: string; url: string }[];
-  socials: { type: string; url: string }[];
-  buys24h: number;
-  sells24h: number;
-  priceChange24h: number;
-  externalUrl?: string; // CMC or CoinGecko URL
-  searchUrl?: string; // Fallback search URL for high-value tokens
-}
-
-export interface SecurityReport {
-  address: string;
-  isValid: boolean;
-  mintAuthority: string | null;
-  freezeAuthority: string | null;
-  supply: number;
-  decimals: number;
-  isMintable: boolean;
-  isFreezable: boolean;
-  isMutable: boolean | null; // null if unknown
-  isLpBurned: boolean;
-  isHoneypot: boolean; // Simulation proxy
-  topHolders: { address: string; amount: number; percentage: number }[];
-  marketData?: MarketData;
-  riskScore: number; // 0-100 (High is risky)
-  verdict: string;
-}
-
-export async function getDexScreenerData(tokenAddress: string): Promise<MarketData | null> {
-  try {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), 5000); // 5s timeout
-
-    const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`, {
-      signal: controller.signal
-    });
-    clearTimeout(id);
-
-    if (!res.ok) return null;
-    
-    const data = await res.json();
-    if (!data.pairs || data.pairs.length === 0) return null;
-
-    // 1. Try to find pairs where our token is the BASE token
-    let bestPair = data.pairs
-        .filter((p: any) => p.baseToken.address === tokenAddress)
-        .sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
-
-    // 2. If no base pair found, fallback to any pair (likely our token is Quote)
-    if (!bestPair) {
-        bestPair = data.pairs.sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
-    }
-    
-    if (!bestPair) return null;
-
-    const isBase = bestPair.baseToken.address === tokenAddress;
-    const targetToken = isBase ? bestPair.baseToken : bestPair.quoteToken;
-    
-    // Calculate price
-    let price = 0;
-    if (isBase) {
-        price = parseFloat(bestPair.priceUsd || "0");
-    } else {
-        // We are quote. Price = priceUsd / priceNative
-        const pUsd = parseFloat(bestPair.priceUsd || "0");
-        const pNative = parseFloat(bestPair.priceNative || "0");
-        if (pNative > 0) {
-            price = pUsd / pNative;
-        }
-    }
-
-    // Find external links (CMC or CoinGecko) from any pair
-    let externalUrl: string | undefined;
-    let searchUrl: string | undefined;
-    
-    // Check all pairs for info links
-    for (const pair of data.pairs) {
-        if (pair.info?.websites) {
-            const cmc = pair.info.websites.find((w: any) => w.url.includes('coinmarketcap.com'));
-            const cg = pair.info.websites.find((w: any) => w.url.includes('coingecko.com'));
-            
-            if (cmc) {
-                externalUrl = cmc.url;
-                break; // Prioritize CMC and stop
-            }
-            if (cg && !externalUrl) {
-                externalUrl = cg.url;
-                // Continue searching for CMC just in case
-            }
-        }
-    }
-
-    // Fallback: If no explicit link, but Liquidity > $1k, provide a Google Search link for CMC
-    // This helps users find info even for smaller tokens
-    if (!externalUrl && (bestPair.liquidity?.usd || 0) > 1000) {
-        searchUrl = `https://www.google.com/search?q=site:coinmarketcap.com+${targetToken.name}+${targetToken.symbol}+crypto`;
-    }
-
-    return {
-      name: targetToken.name,
-      symbol: targetToken.symbol,
-      imageUrl: bestPair.info?.imageUrl,
-      priceUsd: price,
-      liquidityUsd: bestPair.liquidity?.usd || 0,
-      fdv: bestPair.fdv || 0,
-      pairAddress: bestPair.pairAddress,
-      dexId: bestPair.dexId,
-      volume24h: bestPair.volume?.h24 || 0,
-      websites: bestPair.info?.websites || [],
-      socials: bestPair.info?.socials || [],
-      buys24h: bestPair.txns?.h24?.buys || 0,
-      sells24h: bestPair.txns?.h24?.sells || 0,
-      priceChange24h: bestPair.priceChange?.h24 || 0,
-      externalUrl: externalUrl,
-      searchUrl: searchUrl
-    };
-  } catch (e) {
-    console.warn("DexScreener fetch failed:", e);
-    return null;
-  }
-}
+export { MarketData, SecurityReport };
 
 async function tryConnection(tokenAddress: string, rpcUrl: string) {
   console.log(`Trying RPC: ${rpcUrl}`);
@@ -246,7 +117,7 @@ export async function analyzeToken(tokenAddress: string): Promise<SecurityReport
 
     // 3. Get Market Data (DexScreener)
     console.log("Fetching market data...");
-    const marketData = await getDexScreenerData(tokenAddress);
+    const marketData = await getMarketData(tokenAddress, 'solana');
 
     // Calculate Market Cap and Circulating Supply
     if (marketData) {
