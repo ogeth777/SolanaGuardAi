@@ -191,7 +191,13 @@ export default function Home() {
                 <span className="text-[10px] font-bold text-slate-400 tracking-widest mt-1 uppercase flex items-center gap-1.5">
                     <span className="bg-[#14F195]/20 text-[#14F195] px-1.5 py-0.5 rounded border border-[#14F195]/30">SOLANA</span>
                     <span className="text-slate-600">+</span>
-                    <span className="bg-[#0052FF]/20 text-[#0052FF] px-1.5 py-0.5 rounded border border-[#0052FF]/30">BASE</span>
+                    <span className="bg-[#0052FF]/20 text-[#0052FF] px-1.5 py-0.5 rounded border border-[#0052FF]/30 flex items-center gap-1">
+                        BASE
+                        <span className="flex h-1.5 w-1.5 relative">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
+                        </span>
+                    </span>
                 </span>
             </h1>
         </div>
@@ -520,12 +526,24 @@ function TokenAnalysis({ result }: { result: any }) {
                    onClick={() => {
                      const text = `🛡️ Analysis for ${result.marketData?.symbol || 'Token'}\nPrice: $${result.marketData?.priceUsd}\nScore: ${100 - result.riskScore}/100\n\nScan by Solana Guard AI`;
                      navigator.clipboard.writeText(text);
+                     setCopied(true);
+                     setTimeout(() => setCopied(false), 2000);
                    }}
                    className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-bold text-slate-300 flex items-center justify-center gap-2 transition-colors"
                  >
-                   <ArrowRight className="w-3 h-3" /> Share Report
+                   {copied ? <CheckCircle className="w-3 h-3 text-green-400" /> : <FileText className="w-3 h-3" />}
+                   {copied ? 'Copied!' : 'Copy Report'}
                  </button>
-                 <a href={result.address.startsWith('0x') ? `https://basescan.org/token/${result.address}` : `https://solscan.io/token/${result.address}`} target="_blank" className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors">
+                 
+                 <a 
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`🛡️ Just scanned $${result.marketData?.symbol || 'Token'} on Solana Guard AI!\n\nSafety Score: ${100 - result.riskScore}/100\nChain: ${result.address.startsWith('0x') ? 'BASE 🔵' : 'SOLANA 🟢'}\n\nCheck it here: https://solana-guard-ai.vercel.app`)}`}
+                    target="_blank"
+                    className="px-3 py-2 bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 text-[#1DA1F2] border border-[#1DA1F2]/30 rounded-lg transition-colors flex items-center justify-center"
+                 >
+                    <Twitter className="w-4 h-4" />
+                 </a>
+
+                 <a href={result.address.startsWith('0x') ? `https://basescan.org/token/${result.address}` : `https://solscan.io/token/${result.address}`} target="_blank" className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors flex items-center justify-center">
                     <ExternalLink className="w-4 h-4" />
                  </a>
             </div>
