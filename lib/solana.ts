@@ -21,7 +21,7 @@ const BURN_ADDRESSES = [
   "0x000000000000000000000000000000000000dEaD" // Sometimes used in bridged tokens
 ];
 
-export { MarketData, SecurityReport };
+export type { MarketData, SecurityReport };
 
 async function tryConnection(tokenAddress: string, rpcUrl: string) {
   console.log(`Trying RPC: ${rpcUrl}`);
