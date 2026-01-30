@@ -47,111 +47,17 @@ async function fetchCoinGeckoData(chain: string, address: string): Promise<Parti
 
 export async function getMarketData(tokenAddress: string, chain: 'solana' | 'base'): Promise<MarketData | null> {
     try {
-        // 1. Fetch DexScreener Data (Primary for Market Stats)
-        const controller = new AbortController();
-        const id = setTimeout(() => controller.abort(), 5000); // 5s timeout
-
-        const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`, {
-            signal: controller.signal
-        });
-        clearTimeout(id);
-
-        let dexData: MarketData | null = null;
-
-        if (res.ok) {
-            const data = await res.json();
-            if (data.pairs && data.pairs.length > 0) {
-                // Filter pairs by chain if possible
-                // DexScreener chainId: 'solana' or 'base'
-                const chainId = chain === 'base' ? 'base' : 'solana';
-                
-                // 1. Try to find pairs where our token is the BASE token AND matches chain
-                let bestPair = data.pairs
-                    .filter((p: any) => p.baseToken.address.toLowerCase() === tokenAddress.toLowerCase() && p.chainId === chainId)
-                    .sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
-
-                // 2. If no base pair found, fallback to any pair on the chain
-                if (!bestPair) {
-                    bestPair = data.pairs
-                        .filter((p: any) => p.chainId === chainId)
-                        .sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
-                }
-
-                // 3. Last resort: ANY pair (cross-chain?) - unlikely but maybe user pasted bridged token address
-                if (!bestPair && data.pairs.length > 0) {
-                     bestPair = data.pairs.sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
-                }
-
-                if (bestPair) {
-                    const isBase = bestPair.baseToken.address.toLowerCase() === tokenAddress.toLowerCase();
-                    const targetToken = isBase ? bestPair.baseToken : bestPair.quoteToken;
-
-                    // Calculate price
-                    let price = 0;
-                    if (isBase) {
-                        price = parseFloat(bestPair.priceUsd || "0");
-                    } else {
-                        // We are quote. Price = priceUsd / priceNative
-                        const pUsd = parseFloat(bestPair.priceUsd || "0");
-                        const pNative = parseFloat(bestPair.priceNative || "0");
-                        if (pNative > 0) {
-                            price = pUsd / pNative;
-                        }
-                    }
-
-                    // Extract External Links
-                    let externalUrl: string | undefined;
-                    for (const pair of data.pairs) {
-                        if (pair.info?.websites) {
-                            const cmc = pair.info.websites.find((w: any) => w.url.includes('coinmarketcap.com'));
-                            const cg = pair.info.websites.find((w: any) => w.url.includes('coingecko.com'));
-                            
-                            if (cmc) {
-                                externalUrl = cmc.url;
-                                break;
-                            }
-                            if (cg && !externalUrl) {
-                                externalUrl = cg.url;
-                            }
-                        }
-                    }
-
-                    // Fallback search URL
-                    let searchUrl: string | undefined;
-                    if (!externalUrl && (bestPair.liquidity?.usd || 0) > 1000) {
-                        searchUrl = `https://www.google.com/search?q=site:coinmarketcap.com+${targetToken.name}+${targetToken.symbol}+crypto`;
-                    }
-
-                    dexData = {
-                        name: targetToken.name,
-                        symbol: targetToken.symbol,
-                        imageUrl: bestPair.info?.imageUrl,
-                        priceUsd: price,
-                        liquidityUsd: bestPair.liquidity?.usd || 0,
-                        fdv: bestPair.fdv || 0,
-                        pairAddress: bestPair.pairAddress,
-                        dexId: bestPair.dexId,
-                        volume24h: bestPair.volume?.h24 || 0,
-                        websites: bestPair.info?.websites || [],
-                        socials: bestPair.info?.socials || [],
-                        buys24h: bestPair.txns?.h24?.buys || 0,
-                        sells24h: bestPair.txns?.h24?.sells || 0,
-                        priceChange24h: bestPair.priceChange?.h24 || 0,
-                        externalUrl,
-                        searchUrl
-                    };
-                }
-            }
-        }
-
-        // 2. Fetch CoinGecko Data (Metadata Overlay)
-        const cgData = await fetchCoinGeckoData(chain, tokenAddress);
+        // Run fetches in parallel to speed up loading
+        const [dexRes, cgData] = await Promise.all([
+            fetchDexScreenerData(tokenAddress, chain),
+            fetchCoinGeckoData(chain, tokenAddress)
+        ]);
 
         // 3. Merge Data
-        if (!dexData && !cgData) return null;
+        if (!dexRes && !cgData) return null;
 
         // Start with DexScreener (it has market stats)
-        const finalData = dexData || {
+        const finalData = dexRes || {
             name: "Unknown",
             symbol: "???",
             priceUsd: 0,
@@ -192,6 +98,108 @@ export async function getMarketData(tokenAddress: string, chain: 'solana' | 'bas
 
     } catch (e) {
         console.error("Market Data fetch failed:", e);
+        return null;
+    }
+}
+
+async function fetchDexScreenerData(tokenAddress: string, chain: 'solana' | 'base'): Promise<MarketData | null> {
+    try {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+        const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`, {
+            signal: controller.signal
+        });
+        clearTimeout(id);
+
+        if (!res.ok) return null;
+
+        const data = await res.json();
+        if (data.pairs && data.pairs.length > 0) {
+            // Filter pairs by chain if possible
+            // DexScreener chainId: 'solana' or 'base'
+            const chainId = chain === 'base' ? 'base' : 'solana';
+            
+            // 1. Try to find pairs where our token is the BASE token AND matches chain
+            let bestPair = data.pairs
+                .filter((p: any) => p.baseToken.address.toLowerCase() === tokenAddress.toLowerCase() && p.chainId === chainId)
+                .sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
+
+            // 2. If no base pair found, fallback to any pair on the chain
+            if (!bestPair) {
+                bestPair = data.pairs
+                    .filter((p: any) => p.chainId === chainId)
+                    .sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
+            }
+
+            // 3. Last resort: ANY pair (cross-chain?) - unlikely but maybe user pasted bridged token address
+            if (!bestPair && data.pairs.length > 0) {
+                    bestPair = data.pairs.sort((a: any, b: any) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
+            }
+
+            if (bestPair) {
+                const isBase = bestPair.baseToken.address.toLowerCase() === tokenAddress.toLowerCase();
+                const targetToken = isBase ? bestPair.baseToken : bestPair.quoteToken;
+
+                // Calculate price
+                let price = 0;
+                if (isBase) {
+                    price = parseFloat(bestPair.priceUsd || "0");
+                } else {
+                    // We are quote. Price = priceUsd / priceNative
+                    const pUsd = parseFloat(bestPair.priceUsd || "0");
+                    const pNative = parseFloat(bestPair.priceNative || "0");
+                    if (pNative > 0) {
+                        price = pUsd / pNative;
+                    }
+                }
+
+                // Extract External Links
+                let externalUrl: string | undefined;
+                for (const pair of data.pairs) {
+                    if (pair.info?.websites) {
+                        const cmc = pair.info.websites.find((w: any) => w.url.includes('coinmarketcap.com'));
+                        const cg = pair.info.websites.find((w: any) => w.url.includes('coingecko.com'));
+                        
+                        if (cmc) {
+                            externalUrl = cmc.url;
+                            break;
+                        }
+                        if (cg && !externalUrl) {
+                            externalUrl = cg.url;
+                        }
+                    }
+                }
+
+                // Fallback search URL
+                let searchUrl: string | undefined;
+                if (!externalUrl && (bestPair.liquidity?.usd || 0) > 1000) {
+                    searchUrl = `https://www.google.com/search?q=site:coinmarketcap.com+${targetToken.name}+${targetToken.symbol}+crypto`;
+                }
+
+                return {
+                    name: targetToken.name,
+                    symbol: targetToken.symbol,
+                    imageUrl: bestPair.info?.imageUrl,
+                    priceUsd: price,
+                    liquidityUsd: bestPair.liquidity?.usd || 0,
+                    fdv: bestPair.fdv || 0,
+                    pairAddress: bestPair.pairAddress,
+                    dexId: bestPair.dexId,
+                    volume24h: bestPair.volume?.h24 || 0,
+                    websites: bestPair.info?.websites || [],
+                    socials: bestPair.info?.socials || [],
+                    buys24h: bestPair.txns?.h24?.buys || 0,
+                    sells24h: bestPair.txns?.h24?.sells || 0,
+                    priceChange24h: bestPair.priceChange?.h24 || 0,
+                    externalUrl,
+                    searchUrl
+                };
+            }
+        }
+        return null;
+    } catch (e) {
+        console.error("DexScreener fetch failed:", e);
         return null;
     }
 }
