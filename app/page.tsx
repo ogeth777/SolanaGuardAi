@@ -189,7 +189,8 @@ export default function Home() {
             <h1 className="font-bold text-3xl tracking-tight text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] flex flex-col items-start leading-none">
                 <span>SOLANA GUARD <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14F195] to-[#9945FF] drop-shadow-[0_0_15px_rgba(153,69,255,0.5)]">AI</span></span>
                 <span className="text-[10px] font-bold text-slate-400 tracking-widest mt-1 uppercase flex items-center gap-1.5">
-                    <span className="bg-[#14F195]/20 text-[#14F195] px-1.5 py-0.5 rounded border border-[#14F195]/30">SOLANA</span>
+                    <span className="bg-blue-500/20 text-blue-500 px-1.5 py-0.5 rounded border border-blue-500/30">BASE SUPPORT ADDED</span>
+                    <span className="text-slate-500 normal-case tracking-normal text-[9px] opacity-70">New networks coming soon...</span>
                 </span>
             </h1>
         </div>
