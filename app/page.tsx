@@ -56,9 +56,9 @@ export default function Home() {
                     <div className="flex items-center gap-2 text-xs text-slate-400"><Activity className="w-3 h-3 text-[#14F195]" /> Rug Pull Detection</div>
                 </div>
 
-                <div className="mt-4 p-4 bg-slate-900/40 rounded-xl border border-slate-800/50 text-left">
-                    <h3 className="text-sm font-bold text-slate-300 mb-2">Why Token Security Matters</h3>
-                    <div className="space-y-2 text-xs text-slate-400">
+                <div className="mt-4 p-4 bg-slate-950/80 rounded-xl border border-slate-700/50 text-left">
+                    <h3 className="text-sm font-bold text-white mb-2">Why Token Security Matters</h3>
+                    <div className="space-y-2 text-xs text-slate-300">
                         <div className="flex gap-2">
                             <AlertTriangle className="w-3 h-3 text-yellow-500 flex-shrink-0 mt-0.5" />
                             <span><strong>Avoid Rug Pulls:</strong> Detect if developers can mint infinite tokens or freeze your funds.</span>
@@ -74,18 +74,18 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="mt-4 p-4 bg-gradient-to-r from-slate-900 to-slate-900/50 rounded-xl border border-slate-800 relative group">
+                <div className="mt-4 p-4 bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl border border-slate-700/60 relative group">
                     <div className="flex items-start gap-3">
                         <div className="p-2 bg-[#14F195]/10 rounded-lg border border-[#14F195]/20">
                              <Heart className="w-5 h-5 text-[#14F195]" />
                         </div>
                         <div>
                             <h3 className="text-sm font-bold text-white mb-1">Developer&apos;s Mission</h3>
-                            <p className="text-xs text-slate-400 leading-relaxed">
+                            <p className="text-xs text-slate-300 leading-relaxed">
                                 I created this platform with one goal: <strong>User Safety</strong>. 
                                 Too many traders lose funds to hidden risks like honeypots and rug pulls. 
                                 Solana Guard AI exists to make professional-grade security analysis accessible to everyone. 
-                                <span className="text-slate-300 block mt-1">Always check before you trade. Stay safe. 🛡️</span>
+                                <span className="text-white block mt-1">Always check before you trade. Stay safe. 🛡️</span>
                             </p>
                         </div>
                     </div>
@@ -224,7 +224,7 @@ export default function Home() {
                 <div className={clsx(
                     "rounded-2xl p-4 md:p-6 shadow-xl backdrop-blur-sm border max-w-[90%] md:max-w-[85%]",
                     msg.role === 'assistant' 
-                        ? "bg-slate-900/60 border-slate-800 rounded-tl-none" 
+                        ? "bg-slate-950/90 border-slate-700/50 rounded-tl-none" 
                         : "bg-[#9945FF]/10 border-[#9945FF]/20 rounded-tr-none"
                 )}>
                     {msg.content}
@@ -607,15 +607,15 @@ function StatsSidebar() {
 
   return (
     <div className="hidden xl:flex flex-col gap-4 fixed left-8 top-1/2 -translate-y-1/2 w-80 z-10">
-        <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700/50 p-6 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden ring-1 ring-white/10">
-             <div className="absolute inset-0 bg-gradient-to-br from-[#14F195]/10 to-transparent pointer-events-none"></div>
-             <div className="flex items-center gap-3 mb-6 border-b border-slate-700/50 pb-4">
+        <div className="bg-slate-950 backdrop-blur-xl border border-slate-600/80 p-6 rounded-2xl shadow-[0_0_60px_rgba(0,0,0,0.7)] relative overflow-hidden ring-1 ring-white/10">
+             <div className="absolute inset-0 bg-gradient-to-br from-[#14F195]/5 to-transparent pointer-events-none"></div>
+             <div className="flex items-center gap-3 mb-6 border-b border-slate-700 pb-4">
                 <Activity className="w-5 h-5 text-[#14F195] drop-shadow-[0_0_8px_rgba(20,241,149,0.8)]" />
                 <span className="text-sm font-bold text-white uppercase tracking-widest drop-shadow-md">Network Stats</span>
              </div>
              
              <div className="space-y-6">
-                <div className="bg-slate-950/50 p-4 rounded-xl border border-[#14F195]/20 shadow-inner">
+                <div className="bg-slate-900 p-4 rounded-xl border border-slate-700/60 shadow-inner">
                     <div className="text-xs text-[#14F195] uppercase font-bold tracking-wider mb-2 flex items-center gap-2">
                         <Search className="w-3 h-3" /> Total Tokens Scanned
                     </div>
@@ -629,7 +629,7 @@ function StatsSidebar() {
                 </div>
                 
                 <div className="px-2">
-                    <div className="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-1">Threats Neutralized</div>
+                    <div className="text-[11px] text-slate-300 uppercase font-bold tracking-wider mb-1">Threats Neutralized</div>
                     <div className="text-2xl font-mono font-bold text-red-400 flex items-center gap-2 drop-shadow-[0_0_10px_rgba(248,113,113,0.3)]">
                         {threats.toLocaleString()}
                         <AlertTriangle className="w-4 h-4 text-red-500 animate-pulse" />
@@ -637,13 +637,13 @@ function StatsSidebar() {
                 </div>
 
                 <div className="px-2">
-                    <div className="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-2">Active Networks</div>
+                    <div className="text-[11px] text-slate-300 uppercase font-bold tracking-wider mb-2">Active Networks</div>
                     <div className="flex gap-2">
-                        <div className="flex items-center gap-1.5 bg-black/40 px-2 py-1.5 rounded border border-[#14F195]/30">
+                        <div className="flex items-center gap-1.5 bg-black/60 px-2 py-1.5 rounded border border-[#14F195]/40 hover:bg-black/80 transition-colors">
                             <img src="/logos/sol.png" alt="SOL" className="w-3.5 h-3.5" />
                             <span className="text-[10px] font-bold text-[#14F195]">SOLANA</span>
                         </div>
-                        <div className="flex items-center gap-1.5 bg-black/40 px-2 py-1.5 rounded border border-[#0052FF]/30">
+                        <div className="flex items-center gap-1.5 bg-black/60 px-2 py-1.5 rounded border border-[#0052FF]/40 hover:bg-black/80 transition-colors">
                             <div className="w-3.5 h-3.5 rounded-full bg-[#0052FF] border border-white/20"></div>
                             <span className="text-[10px] font-bold text-[#0052FF]">BASE</span>
                         </div>
@@ -651,8 +651,8 @@ function StatsSidebar() {
                 </div>
 
                 <div className="px-2">
-                    <div className="text-[11px] text-slate-400 uppercase font-bold tracking-wider mb-2">System Status</div>
-                    <div className="flex items-center gap-2 text-[#14F195] text-sm font-bold bg-[#14F195]/10 px-3 py-1.5 rounded-lg w-fit border border-[#14F195]/20 shadow-[0_0_15px_rgba(20,241,149,0.1)]">
+                    <div className="text-[11px] text-slate-300 uppercase font-bold tracking-wider mb-2">System Status</div>
+                    <div className="flex items-center gap-2 text-[#14F195] text-sm font-bold bg-[#14F195]/10 px-3 py-1.5 rounded-lg w-fit border border-[#14F195]/30 shadow-[0_0_15px_rgba(20,241,149,0.1)]">
                         <Zap className="w-4 h-4 fill-current" /> OPERATIONAL
                     </div>
                 </div>
@@ -693,16 +693,16 @@ function RightActivityPanel() {
 
     return (
         <div className="hidden xl:flex flex-col gap-4 fixed right-8 top-1/2 -translate-y-1/2 w-80 z-10">
-            <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700/50 p-6 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden ring-1 ring-white/10">
+            <div className="bg-slate-950 backdrop-blur-xl border border-slate-600/80 p-6 rounded-2xl shadow-[0_0_60px_rgba(0,0,0,0.7)] relative overflow-hidden ring-1 ring-white/10">
                 <div className="absolute inset-0 bg-gradient-to-bl from-[#9945FF]/10 to-transparent pointer-events-none"></div>
-                <div className="flex items-center gap-3 mb-6 border-b border-slate-700/50 pb-4">
+                <div className="flex items-center gap-3 mb-6 border-b border-slate-700 pb-4">
                     <Search className="w-5 h-5 text-[#9945FF] drop-shadow-[0_0_8px_rgba(153,69,255,0.8)]" />
                     <span className="text-sm font-bold text-white uppercase tracking-widest drop-shadow-md">Recent Scans</span>
                 </div>
                 
                 <div className="space-y-4">
                     {activities.map((item, i) => (
-                        <div key={i} className="flex items-center justify-between text-sm animate-in slide-in-from-right-2 fade-in duration-500 border-b border-slate-800/50 pb-2 last:border-0 last:pb-0">
+                        <div key={i} className="flex items-center justify-between text-sm animate-in slide-in-from-right-2 fade-in duration-500 border-b border-slate-700/60 pb-2 last:border-0 last:pb-0">
                             <div className="flex items-center gap-3">
                                 <div className={clsx("w-2 h-2 rounded-full shadow-[0_0_8px_currentColor]", 
                                     item.risk === 'HIGH' ? 'bg-red-500 text-red-500' : 
@@ -710,7 +710,7 @@ function RightActivityPanel() {
                                 )}></div>
                                 <div>
                                     <div className="font-mono text-white font-bold tracking-wide leading-none">${item.token}</div>
-                                    <div className="text-[9px] font-bold text-slate-500 mt-0.5 flex items-center gap-1">
+                                    <div className="text-[9px] font-bold text-slate-400 mt-0.5 flex items-center gap-1">
                                         {item.chain === 'BASE' ? (
                                             <span className="text-[#0052FF]">BASE</span>
                                         ) : (

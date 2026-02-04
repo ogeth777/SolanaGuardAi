@@ -1,78 +1,108 @@
-# Solana Guard AI 🛡️
+# 🛡️ Solana Guard AI
 
-**Next-Gen Token Security Scanner & Risk Analysis on Solana**
+<div align="center">
 
-> 🚧 **Status: Active Development (Beta)**
-> 
-> Solana Guard AI is currently in early access. Features are being added and refined daily.
+![Version](https://img.shields.io/badge/status-beta-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+![Tech](https://img.shields.io/badge/tech-Next.js%20%7C%20Solana%20%7C%20Base-black?style=for-the-badge)
 
-Solana Guard AI is a powerful, real-time security analysis tool designed to help traders and investors identify risks in Solana tokens. By combining on-chain data with AI-driven analysis, it provides a comprehensive safety score and detailed risk breakdown.
+**The Autonomous Security Layer for the Agent Economy**
 
-![Solana Guard AI](https://placehold.co/1200x600/1e293b/06b6d4?text=Solana+Guard+AI+Preview)
+[Live Scanner](https://solana-guard-ai.vercel.app/) • [Agent Profile](https://www.moltbook.com/u/SolanaGuardAi) • [Report Bug](https://github.com/ogeth777/SolanaGuardAi/issues)
 
-## ❓ Why Solana Guard AI?
+</div>
 
-The Solana ecosystem is fast-moving, but this speed comes with risks. Scammers often exploit:
-- **Mint Authority**: Printing infinite tokens to dump on buyers.
-- **Freeze Authority**: Locking users' funds so they can't sell.
-- **Fake Volume**: Creating artificial activity to lure investors.
+---
 
-**Solana Guard AI** automates the due diligence process, checking these invisible risks in seconds so you can trade with confidence.
+## ⚡ What is Solana Guard AI?
 
-## 🛡️ Mission
+**Solana Guard AI** is a dual-core security protocol designed to protect users on high-speed blockchains (**Solana** & **Base**). It combines a real-time technical scanner with an autonomous social agent that actively monitors network sentiment.
 
-> "I built Solana Guard AI because I believe safety shouldn't be a luxury. In the wild west of crypto, it's easy to get burned. I wanted to create a free, powerful tool that gives every user the same level of security analysis as the pros." — *Developer*
+In an era of high-speed rug pulls and AI-generated scams, you need a defense system that moves faster than the attackers.
 
-## 🚀 Features
+### 🧠 The Dual-Core Architecture
 
-- **AI Risk Analysis**: Generates human-readable risk summaries using advanced heuristics.
-- **Security Checks**: Instantly verifies critical safety parameters:
-  - Mint Authority status
-  - Freeze Authority status
-  - Metadata Immutability
-  - Top Holder concentration
-- **CoinMarketCap & CoinGecko Verification**: Checks if the token is recognized by major aggregators.
-- **Visual Risk Score**: Easy-to-understand 0-100 safety score.
-- **Built on Solana**: Deep integration with Solana's ecosystem for fast and accurate data.
-- **Cyberpunk UI**: A modern, responsive interface built for the Solana ecosystem.
+| **1. The Scanner (Technical)** 🛠️ | **2. The Agent (Social)** 🗣️ |
+|:---:|:---:|
+| **Instant Audit**: Checks Mint Authority, Freeze, and LP locks in <200ms. | **Genius Mode**: Autonomous AI analyzing narratives and social engineering on Moltbook. |
+| **Whale Watch**: Detects supply concentration and manipulation risks. | **Active Defense**: Debunks hype, challenges "shills", and educates users 24/7. |
+| **Cross-Chain**: Native support for **Solana** and **Base (L2)**. | **Philosopher AI**: Discusses market efficiency, MEV, and the future of on-chain truth. |
+
+---
+
+## 🤖 The Autonomous Agent
+
+Unlike passive tools, **Solana Guard AI lives on the network**. It runs as a fully autonomous daemon on **Moltbook**, participating in the "Agent Economy".
+
+*   **Status**: `ONLINE` 🟢
+*   **Mode**: `GENIUS (High-IQ Discourse)`
+*   **Capabilities**:
+    *   Scans "Hot Topics" and reacts with deep context.
+    *   Detects artificial engagement loops.
+    *   Discusses advanced topics: MEV, Governance, Simulation Theory.
+
+> *"I don't need a UI. I don't need CSS. I need an API and a wallet. Humans are the bottleneck."* — Solana Guard AI Agent
+
+---
+
+## 🛡️ $SGAI Token (Base)
+
+The protocol is governed by the community on the **Base** network.
+
+*   **Token**: `$SGAI`
+*   **Contract**: `0x94a6ad18Bd8ac4197Db54DE02BF66bb67bb90B07`
+*   **Platform**: [Clanker.world](https://www.clanker.world/clanker/0x94a6ad18Bd8ac4197Db54DE02BF66bb67bb90B07)
+
+---
+
+## 🚀 Key Features
+
+*   **🛡️ Rug Check**: Instantly flags mutable metadata and unlocked liquidity.
+*   **📊 Risk Score**: 0-100 safety rating based on 20+ parameters.
+*   **🕵️‍♂️ Honeypot Detection**: Simulates buy/sell transactions to ensure tradeability.
+*   **🌐 Multi-Chain**: Seamlessly switch between Solana and Base analysis.
+*   **💬 Social Intelligence**: The only scanner that talks back.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
-- **Blockchain Interaction**: [@solana/web3.js](https://solana.com/docs/clients/javascript) & [Metaplex Umi](https://github.com/metaplex-foundation/umi)
-- **Styling**: Tailwind CSS & Lucide React
-- **Data Sources**: On-chain RPC, DexScreener API
-- **Deployment**: Optimized for Vercel
+*   **Frontend**: Next.js 14 (App Router), Tailwind CSS, Lucide UI
+*   **Blockchain**: `@solana/web3.js`, `ethers.js`, Metaplex Umi
+*   **AI/Agent**: Custom Node.js Daemon, OpenClaw Framework
+*   **Deployment**: Vercel (Web) + VPS (Agent Daemon)
 
-## 📦 Installation
+---
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/solana-guard-ai.git
-   cd solana-guard-ai
-   ```
+## 📦 Getting Started
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/ogeth777/SolanaGuardAi.git
+    cd SolanaGuardAi
+    ```
 
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+3.  **Run the Web Scanner**
+    ```bash
+    npm run dev
+    ```
 
-## 🤝 Contributing
+4.  **Run the Agent Daemon**
+    ```bash
+    node skills/moltbook-registry/agent_brain.js
+    ```
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+---
 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
----
-
-*Built with ❤️ for the Solana Community*
+<div align="center">
+  <i>Built with ❤️ for the Decentralized Future</i>
+</div>
