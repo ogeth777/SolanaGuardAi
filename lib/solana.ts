@@ -117,7 +117,7 @@ export async function analyzeToken(tokenAddress: string): Promise<SecurityReport
 
     // 3. Get Market Data (DexScreener)
     console.log("Fetching market data...");
-    const marketData = await getMarketData(tokenAddress, 'solana');
+    const marketData = await getMarketData(tokenAddress);
 
     // Calculate Market Cap and Circulating Supply
     if (marketData) {

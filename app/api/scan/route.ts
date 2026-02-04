@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { analyzeToken } from '@/lib/solana';
-import { analyzeBaseToken } from '@/lib/base';
 
 export async function POST(request: Request) {
   try {
@@ -13,15 +12,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Address is required' }, { status: 400 });
     }
 
-    let report;
-    // Check if EVM address (Base)
+    // Only allow Solana addresses (simple check, assume non-0x or validate length if needed)
     if (address.startsWith('0x')) {
-        report = await analyzeBaseToken(address);
-    } else {
-        // Assume Solana
-        report = await analyzeToken(address);
+        return NextResponse.json({ error: 'Only Solana addresses are supported' }, { status: 400 });
     }
 
+    const report = await analyzeToken(address);
     return NextResponse.json(report);
     
   } catch (error: any) {

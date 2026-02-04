@@ -1,16 +1,9 @@
 
 import { MarketData } from './types';
 
-// CoinGecko Platform IDs
-const CG_PLATFORMS: Record<string, string> = {
-    'solana': 'solana',
-    'base': 'base'
-};
-
-async function fetchCoinGeckoData(chain: string, address: string): Promise<Partial<MarketData> | null> {
+async function fetchCoinGeckoData(address: string): Promise<Partial<MarketData> | null> {
     try {
-        const platformId = CG_PLATFORMS[chain];
-        if (!platformId) return null;
+        const platformId = 'solana';
 
         const controller = new AbortController();
         const id = setTimeout(() => controller.abort(), 3000); // 3s timeout (fast fail)
@@ -45,12 +38,12 @@ async function fetchCoinGeckoData(chain: string, address: string): Promise<Parti
     }
 }
 
-export async function getMarketData(tokenAddress: string, chain: 'solana' | 'base'): Promise<MarketData | null> {
+export async function getMarketData(tokenAddress: string): Promise<MarketData | null> {
     try {
         // Run fetches in parallel to speed up loading
         const [dexRes, cgData] = await Promise.all([
-            fetchDexScreenerData(tokenAddress, chain),
-            fetchCoinGeckoData(chain, tokenAddress)
+            fetchDexScreenerData(tokenAddress),
+            fetchCoinGeckoData(tokenAddress)
         ]);
 
         // 3. Merge Data
@@ -102,7 +95,7 @@ export async function getMarketData(tokenAddress: string, chain: 'solana' | 'bas
     }
 }
 
-async function fetchDexScreenerData(tokenAddress: string, chain: 'solana' | 'base'): Promise<MarketData | null> {
+async function fetchDexScreenerData(tokenAddress: string): Promise<MarketData | null> {
     try {
         const controller = new AbortController();
         const id = setTimeout(() => controller.abort(), 5000); // 5s timeout
@@ -117,8 +110,7 @@ async function fetchDexScreenerData(tokenAddress: string, chain: 'solana' | 'bas
         const data = await res.json();
         if (data.pairs && data.pairs.length > 0) {
             // Filter pairs by chain if possible
-            // DexScreener chainId: 'solana' or 'base'
-            const chainId = chain === 'base' ? 'base' : 'solana';
+            const chainId = 'solana';
             
             // 1. Try to find pairs where our token is the BASE token AND matches chain
             let bestPair = data.pairs

@@ -37,7 +37,7 @@ export default function Home() {
         content: (
             <div className="space-y-2">
                 <p>Hello! I am <span className="text-[#14F195] font-bold">Solana Guard AI</span>.</p>
-                <p>I can audit any <span className="text-[#14F195] font-bold">Solana</span> or <span className="text-[#0052FF] font-bold">Base</span> token for security risks, honeypots, and whale manipulation.</p>
+                <p>I can audit any <span className="text-[#14F195] font-bold">Solana</span> token for security risks, honeypots, and whale manipulation.</p>
                 <div className="flex flex-wrap gap-2 py-1">
                     <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800/50 border border-slate-700/50 text-xs font-medium text-slate-300">
                         <img src="/CoinMarketCap.jpg" alt="CMC" className="w-4 h-4 rounded-full" />
@@ -190,14 +190,6 @@ export default function Home() {
                 <span>SOLANA GUARD <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14F195] to-[#9945FF] drop-shadow-[0_0_15px_rgba(153,69,255,0.5)]">AI</span></span>
                 <span className="text-[10px] font-bold text-slate-400 tracking-widest mt-1 uppercase flex items-center gap-1.5">
                     <span className="bg-[#14F195]/20 text-[#14F195] px-1.5 py-0.5 rounded border border-[#14F195]/30">SOLANA</span>
-                    <span className="text-slate-600">+</span>
-                    <span className="bg-[#0052FF]/20 text-[#0052FF] px-1.5 py-0.5 rounded border border-[#0052FF]/30 flex items-center gap-1">
-                        BASE
-                        <span className="flex h-1.5 w-1.5 relative">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
-                        </span>
-                    </span>
                 </span>
             </h1>
         </div>
@@ -243,7 +235,7 @@ export default function Home() {
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Enter Token Address (Solana or Base 0x...)"
+                    placeholder="Enter Token Address (Solana)..."
                     className="flex-1 bg-transparent border-none text-white px-4 py-3 focus:ring-0 placeholder-slate-500 font-mono"
                     disabled={loading}
                 />
@@ -274,11 +266,6 @@ export default function Home() {
                     <a href="https://x.com/solana" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-black/40 px-2 py-1 rounded border border-slate-800/50 hover:bg-black/60 hover:border-[#14F195]/30 transition-all">
                         <img src="/logos/sol.png" alt="Solana" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-bold text-slate-300">Solana</span>
-                    </a>
-                    <a href="https://base.org" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-black/40 px-2 py-1 rounded border border-slate-800/50 hover:bg-black/60 hover:border-[#0052FF]/30 transition-all">
-                         {/* Base Logo (Blue Circle) */}
-                        <div className="w-3.5 h-3.5 rounded-full bg-[#0052FF] border border-white/20"></div>
-                        <span className="text-[10px] font-bold text-slate-300">Base</span>
                     </a>
                 </div>
                 <div className="flex items-center gap-2 text-[10px] text-slate-400 uppercase tracking-wider font-bold">
@@ -448,11 +435,7 @@ function TokenAnalysis({ result }: { result: any }) {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                              <h2 className="text-xl font-bold text-white">{marketData?.name || "Unknown"}</h2>
-                             {result.address.startsWith('0x') ? (
-                                <span className="bg-[#0052FF]/20 text-[#0052FF] text-[10px] font-bold px-2 py-0.5 rounded border border-[#0052FF]/30">BASE</span>
-                             ) : (
-                                <span className="bg-[#14F195]/20 text-[#14F195] text-[10px] font-bold px-2 py-0.5 rounded border border-[#14F195]/30">SOL</span>
-                             )}
+                             <span className="bg-[#14F195]/20 text-[#14F195] text-[10px] font-bold px-2 py-0.5 rounded border border-[#14F195]/30">SOL</span>
                              <span className="text-slate-500 text-sm font-mono">{marketData?.symbol}</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-slate-400 font-mono bg-slate-950/30 px-2 py-1 rounded border border-slate-800/50 cursor-pointer hover:border-[#14F195]/50 transition-colors"
@@ -536,14 +519,14 @@ function TokenAnalysis({ result }: { result: any }) {
                  </button>
                  
                  <a 
-                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`🛡️ Just scanned $${result.marketData?.symbol || 'Token'} on Solana Guard AI!\n\nSafety Score: ${100 - result.riskScore}/100\nChain: ${result.address.startsWith('0x') ? 'BASE 🔵' : 'SOLANA 🟢'}\n\nCheck it here: https://solana-guard-ai.vercel.app`)}`}
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`🛡️ Just scanned $${result.marketData?.symbol || 'Token'} on Solana Guard AI!\n\nSafety Score: ${100 - result.riskScore}/100\nChain: SOLANA 🟢\n\nCheck it here: https://solana-guard-ai.vercel.app`)}`}
                     target="_blank"
                     className="px-3 py-2 bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 text-[#1DA1F2] border border-[#1DA1F2]/30 rounded-lg transition-colors flex items-center justify-center"
                  >
                     <Twitter className="w-4 h-4" />
                  </a>
 
-                 <a href={result.address.startsWith('0x') ? `https://basescan.org/token/${result.address}` : `https://solscan.io/token/${result.address}`} target="_blank" className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors flex items-center justify-center">
+                 <a href={`https://solscan.io/token/${result.address}`} target="_blank" className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors flex items-center justify-center">
                     <ExternalLink className="w-4 h-4" />
                  </a>
             </div>
@@ -644,10 +627,6 @@ function StatsSidebar() {
                             <img src="/logos/sol.png" alt="SOL" className="w-3.5 h-3.5" />
                             <span className="text-[10px] font-bold text-[#14F195]">SOLANA</span>
                         </div>
-                        <div className="flex items-center gap-1.5 bg-slate-950/80 px-2 py-1.5 rounded border border-[#0052FF]/40 hover:bg-[#0052FF]/10 transition-colors cursor-default shadow-[0_0_10px_rgba(0,82,255,0.1)]">
-                            <div className="w-3.5 h-3.5 rounded-full bg-[#0052FF] border border-white/20"></div>
-                            <span className="text-[10px] font-bold text-[#0052FF]">BASE</span>
-                        </div>
                     </div>
                 </div>
 
@@ -666,18 +645,14 @@ function StatsSidebar() {
 function RightActivityPanel() {
     const [activities, setActivities] = useState([
         { type: 'scan', token: 'BONK', chain: 'SOL', risk: 'LOW', time: '2s ago' },
-        { type: 'scan', token: 'BRETT', chain: 'BASE', risk: 'LOW', time: '5s ago' },
         { type: 'alert', token: 'SCAM...', chain: 'SOL', risk: 'HIGH', time: '12s ago' },
         { type: 'scan', token: 'JUP', chain: 'SOL', risk: 'LOW', time: '15s ago' },
-        { type: 'scan', token: 'TOSHI', chain: 'BASE', risk: 'LOW', time: '24s ago' },
     ]);
 
     useEffect(() => {
         const tokens = [
             { s: 'SOL', c: 'SOL' }, { s: 'USDC', c: 'SOL' }, { s: 'RAY', c: 'SOL' }, { s: 'ORCA', c: 'SOL' },
             { s: 'MYRO', c: 'SOL' }, { s: 'SAMO', c: 'SOL' }, { s: 'ANALOS', c: 'SOL' }, { s: 'SILLY', c: 'SOL' },
-            { s: 'BRETT', c: 'BASE' }, { s: 'DEGEN', c: 'BASE' }, { s: 'MOG', c: 'BASE' }, { s: 'TOSHI', c: 'BASE' },
-            { s: 'KEYCAT', c: 'BASE' }, { s: 'NORMIE', c: 'BASE' }
         ];
 
         const interval = setInterval(() => {
@@ -712,11 +687,7 @@ function RightActivityPanel() {
                                 <div>
                                     <div className="font-mono text-white font-bold tracking-wide leading-none">${item.token}</div>
                                     <div className="text-[9px] font-bold text-slate-400 mt-0.5 flex items-center gap-1">
-                                        {item.chain === 'BASE' ? (
-                                            <span className="text-[#0052FF] bg-[#0052FF]/10 px-1 rounded">BASE</span>
-                                        ) : (
-                                            <span className="text-[#14F195] bg-[#14F195]/10 px-1 rounded">SOLANA</span>
-                                        )}
+                                        <span className="text-[#14F195] bg-[#14F195]/10 px-1 rounded">SOLANA</span>
                                     </div>
                                 </div>
                             </div>

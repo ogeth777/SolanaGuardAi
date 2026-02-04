@@ -10,8 +10,11 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Address is required' }, { status: 400 });
     }
 
-    const chain = address.startsWith('0x') ? 'base' : 'solana';
-    const marketData = await getMarketData(address, chain);
+    if (address.startsWith('0x')) {
+       return NextResponse.json({ error: 'Only Solana addresses are supported' }, { status: 400 });
+    }
+
+    const marketData = await getMarketData(address);
     
     if (!marketData) {
         return NextResponse.json({ error: 'Data not found' }, { status: 404 });
