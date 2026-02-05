@@ -3,7 +3,7 @@ import { MarketData } from './types';
 
 async function fetchCoinGeckoData(address: string): Promise<Partial<MarketData> | null> {
     try {
-        const platformId = 'solana';
+        const platformId = address.startsWith('0x') ? 'base' : 'solana';
 
         const controller = new AbortController();
         const id = setTimeout(() => controller.abort(), 3000); // 3s timeout (fast fail)
@@ -110,7 +110,7 @@ async function fetchDexScreenerData(tokenAddress: string): Promise<MarketData | 
         const data = await res.json();
         if (data.pairs && data.pairs.length > 0) {
             // Filter pairs by chain if possible
-            const chainId = 'solana';
+            const chainId = tokenAddress.startsWith('0x') ? 'base' : 'solana';
             
             // 1. Try to find pairs where our token is the BASE token AND matches chain
             let bestPair = data.pairs

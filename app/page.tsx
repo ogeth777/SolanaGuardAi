@@ -36,8 +36,8 @@ export default function Home() {
         role: 'assistant',
         content: (
             <div className="space-y-2">
-                <p>Hello! I am <span className="text-[#14F195] font-bold">Solana Guard AI</span>.</p>
-                <p>I can audit any <span className="text-[#14F195] font-bold">Solana</span> token for security risks, honeypots, and whale manipulation.</p>
+                <p>Hello! I am <span className="text-[#14F195] font-bold">Solana Guard AI v2.0</span>.</p>
+                <p>I can audit any <span className="text-[#14F195] font-bold">Solana & Base</span> token for security risks, honeypots, and whale manipulation.</p>
                 <div className="flex flex-wrap gap-2 py-1">
                     <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800/50 border border-slate-700/50 text-xs font-medium text-slate-300">
                         <img src="/CoinMarketCap.jpg" alt="CMC" className="w-4 h-4 rounded-full" />
@@ -236,7 +236,7 @@ export default function Home() {
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Enter Token Address (Solana)..."
+                    placeholder="Enter Token Address (Solana / Base)..."
                     className="flex-1 bg-transparent border-none text-white px-4 py-3 focus:ring-0 placeholder-slate-500 font-mono"
                     disabled={loading}
                 />
@@ -267,6 +267,10 @@ export default function Home() {
                     <a href="https://x.com/solana" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-black/40 px-2 py-1 rounded border border-slate-800/50 hover:bg-black/60 hover:border-[#14F195]/30 transition-all">
                         <img src="/logos/sol.png" alt="Solana" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-bold text-slate-300">Solana</span>
+                    </a>
+                    <a href="https://base.org" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-black/40 px-2 py-1 rounded border border-slate-800/50 hover:bg-black/60 hover:border-blue-500/30 transition-all">
+                        <img src="/logos/base.png" alt="Base" className="w-3.5 h-3.5 rounded-full" />
+                        <span className="text-[10px] font-bold text-slate-300">Base</span>
                     </a>
                 </div>
                 <div className="flex items-center gap-2 text-[10px] text-slate-400 uppercase tracking-wider font-bold">
@@ -436,7 +440,11 @@ function TokenAnalysis({ result }: { result: any }) {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                              <h2 className="text-xl font-bold text-white">{marketData?.name || "Unknown"}</h2>
-                             <span className="bg-[#14F195]/20 text-[#14F195] text-[10px] font-bold px-2 py-0.5 rounded border border-[#14F195]/30">SOL</span>
+                             {result.address.startsWith('0x') ? (
+                                <span className="bg-blue-500/20 text-blue-500 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-500/30">BASE</span>
+                             ) : (
+                                <span className="bg-[#14F195]/20 text-[#14F195] text-[10px] font-bold px-2 py-0.5 rounded border border-[#14F195]/30">SOL</span>
+                             )}
                              <span className="text-slate-500 text-sm font-mono">{marketData?.symbol}</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-slate-400 font-mono bg-slate-950/30 px-2 py-1 rounded border border-slate-800/50 cursor-pointer hover:border-[#14F195]/50 transition-colors"
@@ -627,6 +635,10 @@ function StatsSidebar() {
                         <div className="flex items-center gap-1.5 bg-slate-950/80 px-2 py-1.5 rounded border border-[#14F195]/40 hover:bg-[#14F195]/10 transition-colors cursor-default shadow-[0_0_10px_rgba(20,241,149,0.1)]">
                             <img src="/logos/sol.png" alt="SOL" className="w-3.5 h-3.5" />
                             <span className="text-[10px] font-bold text-[#14F195]">SOLANA</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 bg-slate-950/80 px-2 py-1.5 rounded border border-blue-500/40 hover:bg-blue-500/10 transition-colors cursor-default shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                            <img src="/logos/base.png" alt="BASE" className="w-3.5 h-3.5 rounded-full" />
+                            <span className="text-[10px] font-bold text-blue-500">BASE</span>
                         </div>
                     </div>
                 </div>

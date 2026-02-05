@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { analyzeToken } from '@/lib/solana';
+import { analyzeBaseToken } from '@/lib/base';
 
 export async function POST(request: Request) {
   try {
@@ -12,12 +13,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Address is required' }, { status: 400 });
     }
 
-    // Only allow Solana addresses (simple check, assume non-0x or validate length if needed)
+    let report;
     if (address.startsWith('0x')) {
-        return NextResponse.json({ error: 'Only Solana addresses are supported' }, { status: 400 });
+      report = await analyzeBaseToken(address);
+    } else {
+      report = await analyzeToken(address);
     }
 
-    const report = await analyzeToken(address);
     return NextResponse.json(report);
     
   } catch (error: any) {
