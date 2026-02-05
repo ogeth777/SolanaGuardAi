@@ -36,7 +36,7 @@ export default function Home() {
         role: 'assistant',
         content: (
             <div className="space-y-2">
-                <p>Hello! I am <span className="text-[#14F195] font-bold">Solana Guard AI v2.0</span>.</p>
+                <p>Hello! I am <span className="text-[#14F195] font-bold">Solana Guard AI v2.1</span>.</p>
                 <p>I can audit any <span className="text-[#14F195] font-bold">Solana & Base</span> token for security risks, honeypots, and whale manipulation.</p>
                 <div className="flex flex-wrap gap-2 py-1">
                     <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800/50 border border-slate-700/50 text-xs font-medium text-slate-300">

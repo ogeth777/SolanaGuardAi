@@ -32,7 +32,7 @@ export async function analyzeBaseToken(tokenAddress: string): Promise<SecurityRe
     // DexScreener auto-detects chain, but we can verify it's on Base if we want.
     // getDexScreenerData logic in solana.ts is generic enough if we pass the address.
     // However, we need to ensure we are getting Base data.
-    const marketData = await getMarketData(tokenAddress, 'base');
+    const marketData = await getMarketData(tokenAddress);
     
     // Check if it's actually on Base
     if (marketData && !marketData.pairAddress.startsWith('0x')) {
