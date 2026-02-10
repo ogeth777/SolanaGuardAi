@@ -175,7 +175,11 @@ export default function Home() {
       // 3. Replace Thinking with Result
       setMessages(prev => prev.map(m => m.id === loadingId ? {
         ...m,
-        content: <TokenAnalysis result={result} />
+        content: (
+            <div className="animate-in fade-in zoom-in-95 duration-700 ease-out">
+                <TokenAnalysis result={result} />
+            </div>
+        )
       } : m));
 
     } catch (err: any) {
@@ -197,7 +201,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-[100dvh] bg-[#030014] text-slate-300 font-mono text-sm overflow-hidden cyber-grid selection:bg-[#14F195]/30">
+    <div className="flex flex-col min-h-screen bg-[#030014] text-slate-300 font-mono text-sm cyber-grid selection:bg-[#14F195]/30">
       <div className="crt-overlay pointer-events-none fixed inset-0 z-50"></div>
 
       {/* TOP HUD BAR */}
@@ -239,10 +243,10 @@ export default function Home() {
       </header>
 
       {/* MAIN COMMAND GRID */}
-      <main className="flex-1 p-2 md:p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 overflow-hidden relative z-10">
+      <main className="flex-1 p-2 md:p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 relative z-10">
           
           {/* LEFT COLUMN: Threat Intelligence */}
-          <div className="hidden lg:flex col-span-3 flex-col gap-4 h-full overflow-hidden">
+          <div className="hidden lg:flex col-span-3 flex-col gap-4">
              <StatsModule />
              
              {/* Network Status Module */}
@@ -291,7 +295,7 @@ export default function Home() {
           </div>
 
           {/* CENTER COLUMN: Terminal (Main Chat) */}
-          <div className="col-span-1 lg:col-span-6 flex flex-col h-full gap-4">
+          <div className="col-span-1 lg:col-span-6 flex flex-col h-[80vh] lg:h-[calc(100vh-120px)] gap-4">
               {/* Terminal Window */}
               <div className="hud-panel flex-1 flex flex-col overflow-hidden relative shadow-[0_0_30px_rgba(0,0,0,0.3)]">
                   {/* Terminal Header */}
@@ -368,7 +372,7 @@ export default function Home() {
           </div>
 
           {/* RIGHT COLUMN: Live Feed */}
-          <div className="hidden lg:flex col-span-3 flex-col gap-4 h-full">
+          <div className="hidden lg:flex col-span-3 flex-col gap-4">
                <RightActivityPanel />
                
                {/* Communication Link */}
