@@ -771,27 +771,23 @@ function CheckItem({ label, status, description }: { label: string, status: bool
 }
 
 function StatsModule() {
-  const [scans, setScans] = useState(12421);
-  const [threats, setThreats] = useState(850);
+  const [scans, setScans] = useState(100);
+  const [threats, setThreats] = useState(12);
   
   useEffect(() => {
-    // Initial base calculation
-    const launchDate = new Date('2026-01-29T00:00:00').getTime();
-    const now = Date.now();
-    const daysPassed = Math.max(0, (now - launchDate) / (1000 * 60 * 60 * 24));
-    
-    // Set initial values
-    setScans(prev => prev + Math.floor(daysPassed * 150));
-    setThreats(prev => prev + Math.floor(daysPassed * 12));
+    const calculateStats = () => {
+        const launchDate = new Date('2026-01-29T00:00:00').getTime();
+        const now = Date.now();
+        const daysPassed = Math.max(0, (now - launchDate) / (1000 * 60 * 60 * 24));
+        const scanGrowth = Math.floor(daysPassed * 25);
+        const threatGrowth = Math.floor(daysPassed * 3);
 
-    // Live update simulation
-    const interval = setInterval(() => {
-        setScans(prev => prev + Math.floor(Math.random() * 3)); // Random increment 0-2
-        if (Math.random() > 0.7) {
-            setThreats(prev => prev + 1);
-        }
-    }, 3000); // Update every 3 seconds
+        setScans(100 + scanGrowth);
+        setThreats(12 + threatGrowth);
+    };
 
+    calculateStats();
+    const interval = setInterval(calculateStats, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -811,15 +807,15 @@ function StatsModule() {
 
         <div className="space-y-4 relative z-10">
             <div>
-                <div className="text-[10px] text-[#14F195] uppercase font-bold mb-1">Total Scans (Real-time)</div>
-                <div className="text-2xl font-mono font-bold text-white tracking-tighter tabular-nums">
+                <div className="text-[10px] text-[#14F195] uppercase font-bold mb-1">Total Scans</div>
+                <div className="text-2xl font-mono font-bold text-white tracking-tighter">
                     {scans.toLocaleString()}
                 </div>
             </div>
             
             <div>
                 <div className="text-[10px] text-red-500 uppercase font-bold mb-1">Threats Neutralized</div>
-                <div className="text-2xl font-mono font-bold text-red-500 tracking-tighter flex items-center gap-2 tabular-nums">
+                <div className="text-2xl font-mono font-bold text-red-500 tracking-tighter flex items-center gap-2">
                     {threats.toLocaleString()}
                     <AlertTriangle className="w-4 h-4 animate-pulse" />
                 </div>
