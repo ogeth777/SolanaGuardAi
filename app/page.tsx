@@ -419,8 +419,8 @@ export default function Home() {
                                     <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#14F195] rounded-full shadow-[0_0_10px_#14F195]"></div>
                                     <div className="text-white font-bold mb-1">PHASE 2: EXPANSION [ACTIVE]</div>
                                     <div className="text-slate-400">
-                                        > BASE_CHAIN_UPLINK<br/>
-                                        > HONEYPOT_HEURISTICS_V2
+                                        &gt; BASE_CHAIN_UPLINK<br/>
+                                        &gt; HONEYPOT_HEURISTICS_V2
                                     </div>
                                 </div>
 
