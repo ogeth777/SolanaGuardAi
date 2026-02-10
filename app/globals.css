@@ -18,13 +18,90 @@ body {
   overflow-x: hidden;
 }
 
-/* Modern Web3 Grid */
+/* Modern Web3 Grid & Background */
 .cyber-grid {
-  background-size: 40px 40px;
+  background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+    linear-gradient(to right, rgba(20, 241, 149, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(153, 69, 255, 0.03) 1px, transparent 1px);
+  position: relative;
+}
+
+.cyber-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, #030014 90%);
+  pointer-events: none;
+}
+
+/* CRT Scanline Effect */
+.crt-overlay {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.3;
+}
+
+/* HUD Panel Styling */
+.hud-panel {
+  background: rgba(3, 7, 18, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(20, 241, 149, 0.2);
+  position: relative;
+  clip-path: polygon(
+    0 0, 
+    100% 0, 
+    100% calc(100% - 15px), 
+    calc(100% - 15px) 100%, 
+    0 100%
+  );
+}
+
+.hud-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 15px;
+  height: 1px;
+  background: #14F195;
+  transform: rotate(-45deg);
+  transform-origin: bottom right;
+}
+
+.hud-border-glow {
+  box-shadow: 0 0 15px rgba(20, 241, 149, 0.1);
+}
+
+/* Animated Ticker */
+@keyframes ticker {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-ticker {
+  animation: ticker 20s linear infinite;
+}
+
+/* Glitch Effect */
+@keyframes glitch {
+  2%, 64% { transform: translate(2px,0) skew(0deg); }
+  4%, 60% { transform: translate(-2px,0) skew(0deg); }
+  62% { transform: translate(0,0) skew(5deg); }
+}
+
+.glitch:hover {
+  animation: glitch 1s linear infinite;
 }
 
 /* Glassmorphism Card */
