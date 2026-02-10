@@ -201,25 +201,25 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-600 font-mono text-sm cyber-grid selection:bg-emerald-500/30">
+    <div className="flex flex-col min-h-screen text-slate-400 font-mono text-sm cyber-grid selection:bg-[#14F195]/30">
   <div className="crt-overlay pointer-events-none fixed inset-0 z-50"></div>
 
   {/* TOP HUD BAR */}
-  <header className="flex-none h-14 border-b border-emerald-500/20 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 md:px-6 z-40 relative shadow-sm">
+  <header className="flex-none h-14 border-b border-[#14F195]/20 bg-slate-950/80 backdrop-blur-md flex items-center justify-between px-4 md:px-6 z-40 relative shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
     <div className="flex items-center gap-3">
         <div className="relative">
-            <Shield className="w-6 h-6 text-emerald-500 relative z-10" />
-            <div className="absolute inset-0 bg-emerald-500 blur opacity-30 animate-pulse"></div>
+            <Shield className="w-6 h-6 text-[#14F195] relative z-10" />
+            <div className="absolute inset-0 bg-[#14F195] blur opacity-30 animate-pulse"></div>
         </div>
-        <h1 className="font-bold text-lg tracking-wider text-slate-900 flex items-center gap-2">
-            SOLANA GUARD <span className="text-emerald-600 text-[10px] border border-emerald-500/30 px-1.5 py-0.5 rounded bg-emerald-500/10">AI V2.1</span>
+        <h1 className="font-bold text-lg tracking-wider text-white flex items-center gap-2">
+            SOLANA GUARD <span className="text-[#14F195] text-[10px] border border-[#14F195]/30 px-1.5 py-0.5 rounded bg-[#14F195]/10">AI V2.1</span>
         </h1>
     </div>
 
     {/* Center: System Ticker */}
     <div className="hidden md:flex items-center gap-8 text-[10px] text-slate-500 font-bold tracking-[0.2em]">
-         <div className="flex items-center gap-2 text-emerald-600">
-            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]"></span>
+         <div className="flex items-center gap-2 text-[#14F195]">
+            <span className="w-1.5 h-1.5 bg-[#14F195] rounded-full animate-pulse shadow-[0_0_8px_#14F195]"></span>
             SYSTEM_ONLINE
          </div>
          <div className="flex items-center gap-2">
@@ -235,7 +235,7 @@ export default function Home() {
     {/* Right: Actions */}
     <button 
         onClick={() => setShowAbout(true)}
-        className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/30 rounded text-emerald-600 text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:border-emerald-500/60"
+        className="flex items-center gap-2 px-3 py-1.5 bg-[#14F195]/5 hover:bg-[#14F195]/10 border border-[#14F195]/30 rounded text-[#14F195] text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(20,241,149,0.1)] hover:border-[#14F195]/60"
     >
         <Info className="w-3 h-3" />
         <span className="hidden sm:inline">SYSTEM_INFO</span>
@@ -250,33 +250,33 @@ export default function Home() {
              <StatsModule />
              
              {/* Network Status Module */}
-             <div className="bg-white/50 backdrop-blur-sm border border-slate-200 rounded-xl flex-1 p-4 flex flex-col relative overflow-hidden shadow-sm">
-                 <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                 <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-2 mb-4 relative z-10">Network_Nodes</h3>
+             <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl flex-1 p-4 flex flex-col relative overflow-hidden shadow-lg">
+                 <div className="absolute inset-0 bg-[linear-gradient(rgba(20,241,149,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(20,241,149,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                 <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-800 pb-2 mb-4 relative z-10">Network_Nodes</h3>
                  
                  <div className="space-y-3 relative z-10">
-                    <div className="flex items-center justify-between p-2 bg-white border border-slate-200 rounded group hover:border-emerald-500/30 transition-colors shadow-sm">
+                    <div className="flex items-center justify-between p-2 bg-slate-900/80 border border-slate-800 rounded group hover:border-[#14F195]/30 transition-colors shadow-sm">
                         <div className="flex items-center gap-3">
                             <div className="relative">
                                 <img src="/logos/sol.png" className="w-5 h-5 opacity-80 group-hover:opacity-100 transition-opacity" />
-                                <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-500 rounded-full border border-white"></div>
+                                <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-[#14F195] rounded-full border border-black"></div>
                             </div>
                             <div>
-                                <div className="text-slate-900 font-bold text-xs">SOLANA_MAIN</div>
+                                <div className="text-white font-bold text-xs">SOLANA_MAIN</div>
                                 <div className="text-[10px] text-slate-500">TPS: 3,421</div>
                             </div>
                         </div>
-                        <Activity className="w-4 h-4 text-emerald-500" />
+                        <Activity className="w-4 h-4 text-[#14F195]" />
                     </div>
 
-                    <div className="flex items-center justify-between p-2 bg-white border border-slate-200 rounded group hover:border-blue-500/30 transition-colors shadow-sm">
+                    <div className="flex items-center justify-between p-2 bg-slate-900/80 border border-slate-800 rounded group hover:border-blue-500/30 transition-colors shadow-sm">
                         <div className="flex items-center gap-3">
                             <div className="relative">
                                 <img src="/logos/base.png" className="w-5 h-5 rounded-full opacity-80 group-hover:opacity-100 transition-opacity" />
-                                <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-500 rounded-full border border-white"></div>
+                                <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-[#14F195] rounded-full border border-black"></div>
                             </div>
                             <div>
-                                <div className="text-slate-900 font-bold text-xs">BASE_L2</div>
+                                <div className="text-white font-bold text-xs">BASE_L2</div>
                                 <div className="text-[10px] text-slate-500">Block: 2.0s</div>
                             </div>
                         </div>
@@ -284,8 +284,8 @@ export default function Home() {
                     </div>
                  </div>
 
-                 <div className="mt-auto pt-4 border-t border-slate-200">
-                     <div className="text-[10px] text-slate-400 font-mono">
+                 <div className="mt-auto pt-4 border-t border-slate-800">
+                     <div className="text-[10px] text-slate-500 font-mono">
                         &gt; NODE_SYNC: 100%<br/>
                         &gt; MEMPOOL: NORMAL<br/>
                         &gt; ORACLE: CONNECTED
@@ -297,7 +297,7 @@ export default function Home() {
           {/* CENTER COLUMN: Terminal (Main Chat) */}
           <div className="col-span-1 lg:col-span-6 flex flex-col h-[80vh] lg:h-[calc(100vh-120px)] gap-4">
               {/* Terminal Window */}
-              <div className="hud-panel flex-1 flex flex-col overflow-hidden relative shadow-[0_0_30px_rgba(0,0,0,0.3)]">
+              <div className="hud-panel flex-1 flex flex-col overflow-hidden relative shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                   {/* Terminal Header */}
                   <div className="h-9 bg-slate-950/90 border-b border-[#14F195]/20 flex items-center justify-between px-3 shrink-0">
                       <div className="flex items-center gap-2">
@@ -314,7 +314,7 @@ export default function Home() {
                   {/* Messages */}
                   <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 pb-8 space-y-6 scroll-smooth custom-scrollbar relative">
                       {/* Grid Background inside Terminal */}
-                      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-[linear-gradient(rgba(20,241,149,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(20,241,149,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
                       
                       {messages.map((msg, index) => (
                           <div key={msg.id} className={clsx(
@@ -325,8 +325,8 @@ export default function Home() {
                         <div className={clsx(
                             "w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm border",
                             msg.role === 'assistant' 
-                                ? "bg-emerald-50 border-emerald-200 text-emerald-600" 
-                                : "bg-slate-100 border-slate-200 text-slate-500"
+                                ? "bg-[#14F195]/10 border-[#14F195]/30 text-[#14F195]" 
+                                : "bg-slate-800 border-slate-700 text-slate-400"
                         )}>
                             {msg.role === 'assistant' ? <Bot className="w-6 h-6" /> : <Users className="w-6 h-6" />}
                         </div>
@@ -335,8 +335,8 @@ export default function Home() {
                         <div className={clsx(
                             "rounded-2xl p-4 md:p-6 shadow-sm backdrop-blur-sm border max-w-[90%] md:max-w-[85%]",
                             msg.role === 'assistant' 
-                                ? "bg-white/90 border-slate-200 rounded-tl-none shadow-md" 
-                                : "bg-purple-50 border-purple-100 rounded-tr-none text-slate-700"
+                                ? "bg-slate-900/90 border-[#14F195]/30 rounded-tl-none shadow-[0_0_15px_rgba(0,0,0,0.2)]" 
+                                : "bg-purple-900/10 border-purple-500/20 rounded-tr-none text-slate-300"
                         )}>
                                   {msg.content}
                               </div>
@@ -395,20 +395,20 @@ export default function Home() {
 
       {/* About Modal */}
       {showAbout && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
             {/* Modal Container */}
-            <div className="w-full max-w-4xl bg-white border border-slate-200 relative shadow-xl overflow-hidden flex flex-col max-h-[90vh] rounded-xl">
+            <div className="w-full max-w-4xl bg-slate-950/90 border border-[#14F195]/20 relative shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col max-h-[90vh] rounded-xl backdrop-blur-xl">
                 
                 {/* Modal Header */}
-                <div className="h-12 border-b border-slate-200 bg-slate-50 flex items-center justify-between px-6 shrink-0 relative">
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(16,185,129,0.05),transparent)] animate-ticker"></div>
+                <div className="h-12 border-b border-[#14F195]/20 bg-slate-900/50 flex items-center justify-between px-6 shrink-0 relative">
+                    <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(20,241,149,0.1),transparent)] animate-ticker"></div>
                     <div className="flex items-center gap-3 relative z-10">
-                        <Terminal className="w-4 h-4 text-emerald-600" />
-                        <h2 className="font-mono font-bold text-emerald-600 tracking-[0.2em] text-sm">SYSTEM_KERNEL_INFO // V2.1</h2>
+                        <Terminal className="w-4 h-4 text-[#14F195]" />
+                        <h2 className="font-mono font-bold text-[#14F195] tracking-[0.2em] text-sm">SYSTEM_KERNEL_INFO // V2.1</h2>
                     </div>
                     <button 
                         onClick={() => setShowAbout(false)}
-                        className="relative z-10 p-1.5 hover:bg-slate-200 rounded text-slate-500 hover:text-emerald-600 transition-colors group"
+                        className="relative z-10 p-1.5 hover:bg-[#14F195]/10 rounded text-slate-500 hover:text-[#14F195] transition-colors group"
                     >
                         <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
                     </button>
@@ -417,17 +417,17 @@ export default function Home() {
                 {/* Modal Content */}
                 <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar space-y-8 relative">
                     {/* Background Grid */}
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(20,241,149,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(20,241,149,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
                     {/* Top Section: Identity */}
                     <div className="grid md:grid-cols-[200px_1fr] gap-8 relative z-10">
-                        <div className="flex flex-col items-center justify-center p-6 bg-emerald-50 border border-emerald-100 rounded relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-emerald-100/50 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                            <Shield className="w-16 h-16 text-emerald-500 mb-4 drop-shadow-sm" />
+                        <div className="flex flex-col items-center justify-center p-6 bg-[#14F195]/5 border border-[#14F195]/20 rounded relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-[#14F195]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                            <Shield className="w-16 h-16 text-[#14F195] mb-4 drop-shadow-[0_0_15px_rgba(20,241,149,0.3)]" />
                             <div className="text-center">
-                                <div className="text-slate-900 font-bold font-mono tracking-widest text-lg">SOLANA</div>
-                                <div className="text-emerald-600 font-bold font-mono tracking-widest text-lg">GUARD AI</div>
-                                <div className="mt-2 text-[10px] text-slate-500 font-mono border-t border-slate-200 pt-2">
+                                <div className="text-white font-bold font-mono tracking-widest text-lg">SOLANA</div>
+                                <div className="text-[#14F195] font-bold font-mono tracking-widest text-lg">GUARD AI</div>
+                                <div className="mt-2 text-[10px] text-slate-500 font-mono border-t border-slate-800 pt-2">
                                     BUILD: 2026.02.10<br/>
                                     STATUS: OPERATIONAL
                                 </div>
@@ -437,23 +437,23 @@ export default function Home() {
                         <div className="space-y-4">
                             <div>
                                 <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                    <span className="w-1 h-4 bg-emerald-500"></span>
+                                    <span className="w-1 h-4 bg-[#14F195]"></span>
                                     Primary Directive
                                 </h3>
-                                <p className="text-slate-600 font-mono text-sm leading-relaxed border-l-2 border-slate-200 pl-4">
-                                    Autonomous sentinel designed for the <span className="text-slate-900 font-bold">Solana & Base</span> ecosystems. 
+                                <p className="text-slate-300 font-mono text-sm leading-relaxed border-l-2 border-slate-700 pl-4">
+                                    Autonomous sentinel designed for the <span className="text-white font-bold">Solana & Base</span> ecosystems. 
                                     Utilizes real-time heuristic analysis to detect contract vulnerabilities, rug pulls, and liquidity anomalies before they execute.
                                 </p>
                             </div>
                             
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="p-3 bg-slate-50 border border-slate-200 rounded">
+                                <div className="p-3 bg-slate-900/50 border border-slate-700 rounded">
                                     <div className="text-[10px] text-slate-500 mb-1">SCAN_ENGINE</div>
-                                    <div className="text-emerald-600 font-mono font-bold">HEURISTIC_V3</div>
+                                    <div className="text-[#14F195] font-mono font-bold">HEURISTIC_V3</div>
                                 </div>
-                                <div className="p-3 bg-slate-50 border border-slate-200 rounded">
+                                <div className="p-3 bg-slate-900/50 border border-slate-700 rounded">
                                     <div className="text-[10px] text-slate-500 mb-1">LATENCY</div>
-                                    <div className="text-emerald-600 font-mono font-bold">&lt; 50ms</div>
+                                    <div className="text-[#14F195] font-mono font-bold">&lt; 50ms</div>
                                 </div>
                             </div>
                         </div>
@@ -461,41 +461,41 @@ export default function Home() {
 
                     {/* Middle Section: Roadmap */}
                     <div className="relative z-10">
-                        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2 border-b border-slate-200 pb-2">
+                        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2 border-b border-slate-800 pb-2">
                             <Map className="w-4 h-4" /> 
                             Execution Roadmap
                         </h3>
                         
                         <div className="grid md:grid-cols-3 gap-4">
                             {/* Phase 1 */}
-                            <div className="relative p-4 border border-emerald-200 bg-emerald-50 rounded overflow-hidden">
-                                <div className="absolute top-0 right-0 px-2 py-1 bg-emerald-500 text-white text-[10px] font-bold">COMPLETE</div>
-                                <div className="text-emerald-600 font-bold text-lg mb-1">PHASE I</div>
-                                <div className="text-slate-900 text-xs font-bold mb-3 tracking-wider">GENESIS PROTOCOL</div>
-                                <ul className="space-y-1.5 text-[11px] font-mono text-slate-600">
-                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-emerald-500" /> Core Scanner Init</li>
-                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-emerald-500" /> CMC Integration</li>
-                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-emerald-500" /> Basic Heuristics</li>
+                            <div className="relative p-4 border border-[#14F195]/20 bg-[#14F195]/5 rounded overflow-hidden">
+                                <div className="absolute top-0 right-0 px-2 py-1 bg-[#14F195] text-black text-[10px] font-bold">COMPLETE</div>
+                                <div className="text-[#14F195] font-bold text-lg mb-1">PHASE I</div>
+                                <div className="text-white text-xs font-bold mb-3 tracking-wider">GENESIS PROTOCOL</div>
+                                <ul className="space-y-1.5 text-[11px] font-mono text-slate-400">
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Core Scanner Init</li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> CMC Integration</li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Basic Heuristics</li>
                                 </ul>
                             </div>
 
                             {/* Phase 2 */}
-                            <div className="relative p-4 border border-blue-200 bg-blue-50 rounded overflow-hidden">
+                            <div className="relative p-4 border border-blue-500/20 bg-blue-900/10 rounded overflow-hidden">
                                 <div className="absolute top-0 right-0 px-2 py-1 bg-blue-500 text-white text-[10px] font-bold animate-pulse">ACTIVE</div>
-                                <div className="text-blue-600 font-bold text-lg mb-1">PHASE II</div>
-                                <div className="text-slate-900 text-xs font-bold mb-3 tracking-wider">EXPANSION LAYER</div>
-                                <ul className="space-y-1.5 text-[11px] font-mono text-slate-600">
-                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-blue-500 animate-spin" /> Base Chain Uplink</li>
-                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-blue-500 animate-spin" /> Honeypot V2</li>
-                                    <li className="flex items-center gap-2"><span className="w-3 h-3 rounded-full border border-slate-300 flex items-center justify-center text-[8px] opacity-50">3</span> Multi-DEX Router</li>
+                                <div className="text-blue-400 font-bold text-lg mb-1">PHASE II</div>
+                                <div className="text-white text-xs font-bold mb-3 tracking-wider">EXPANSION LAYER</div>
+                                <ul className="space-y-1.5 text-[11px] font-mono text-slate-400">
+                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-blue-400 animate-spin" /> Base Chain Uplink</li>
+                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-blue-400 animate-spin" /> Honeypot V2</li>
+                                    <li className="flex items-center gap-2"><span className="w-3 h-3 rounded-full border border-slate-600 flex items-center justify-center text-[8px] opacity-50">3</span> Multi-DEX Router</li>
                                 </ul>
                             </div>
 
                             {/* Phase 3 */}
-                            <div className="relative p-4 border border-purple-200 bg-purple-50 rounded overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
-                                <div className="absolute top-0 right-0 px-2 py-1 bg-purple-500/20 text-purple-600 text-[10px] font-bold">PENDING</div>
-                                <div className="text-purple-600 font-bold text-lg mb-1">PHASE III</div>
-                                <div className="text-slate-900 text-xs font-bold mb-3 tracking-wider">OMNI-CHAIN</div>
+                            <div className="relative p-4 border border-purple-500/20 bg-purple-900/10 rounded overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
+                                <div className="absolute top-0 right-0 px-2 py-1 bg-purple-500/20 text-purple-400 text-[10px] font-bold">PENDING</div>
+                                <div className="text-purple-400 font-bold text-lg mb-1">PHASE III</div>
+                                <div className="text-white text-xs font-bold mb-3 tracking-wider">OMNI-CHAIN</div>
                                 <ul className="space-y-1.5 text-[11px] font-mono text-slate-500">
                                     <li className="flex items-center gap-2 text-slate-500">&gt; ETH Mainnet Bridge</li>
                                     <li className="flex items-center gap-2 text-slate-500">&gt; Arb/Optimism Nodes</li>
@@ -506,22 +506,22 @@ export default function Home() {
                     </div>
 
                     {/* Footer System Status */}
-                    <div className="grid grid-cols-4 gap-2 text-[10px] font-mono text-slate-500 border-t border-slate-200 pt-4 relative z-10">
+                    <div className="grid grid-cols-4 gap-2 text-[10px] font-mono text-slate-500 border-t border-slate-800 pt-4 relative z-10">
                         <div className="flex flex-col">
                             <span>MEMORY_HEAP</span>
-                            <span className="text-emerald-600">45% USED</span>
+                            <span className="text-[#14F195]">45% USED</span>
                         </div>
                         <div className="flex flex-col">
                             <span>UPTIME</span>
-                            <span className="text-slate-900">99.99%</span>
+                            <span className="text-slate-200">99.99%</span>
                         </div>
                         <div className="flex flex-col">
                             <span>LAST_AUDIT</span>
-                            <span className="text-slate-900">12 MIN AGO</span>
+                            <span className="text-slate-200">12 MIN AGO</span>
                         </div>
                         <div className="flex flex-col text-right">
                             <span>SECURITY</span>
-                            <span className="text-emerald-600">MAXIMUM</span>
+                            <span className="text-[#14F195]">MAXIMUM</span>
                         </div>
                     </div>
 
@@ -554,21 +554,21 @@ function TypewriterEffect({ text }: { text: string }) {
   }, [text]);
 
   return (
-    <div className="space-y-2 text-sm leading-relaxed text-slate-600 min-h-[60px]">
+    <div className="space-y-2 text-sm leading-relaxed text-slate-300 min-h-[60px]">
         {displayedText.split('\n').map((line: string, i: number) => {
             if (!line) return <div key={i} className="h-2"></div>;
-            if (line.startsWith('### ')) return <div key={i} className="text-lg font-bold text-emerald-600 pt-2 animate-in fade-in duration-300 border-b border-emerald-200 pb-1 mb-2">{line.replace('### ', '')}</div>;
+            if (line.startsWith('### ')) return <div key={i} className="text-lg font-bold text-[#14F195] pt-2 animate-in fade-in duration-300 border-b border-[#14F195]/20 pb-1 mb-2">{line.replace('### ', '')}</div>;
             if (line.startsWith('#### ')) return <div key={i} className="text-sm font-bold text-slate-400 uppercase tracking-widest pt-2 animate-in fade-in duration-300">{line.replace('#### ', '')}</div>;
-            if (line.startsWith('**')) return <div key={i} className="font-bold text-slate-900 pt-1 animate-in fade-in duration-300">{line.replace(/\*\*/g, '')}</div>;
+            if (line.startsWith('**')) return <div key={i} className="font-bold text-white pt-1 animate-in fade-in duration-300">{line.replace(/\*\*/g, '')}</div>;
             
             // Risk/Safety Indicators with specific styling
-            if (line.startsWith('- 🚨') || line.includes('🚨')) return <div key={i} className="text-red-600 font-bold flex gap-2 animate-in fade-in duration-300 bg-red-50 p-2 rounded"><AlertOctagon className="w-4 h-4 mt-0.5 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
-            if (line.startsWith('- ⚠️') || line.includes('⚠️')) return <div key={i} className="text-amber-600 flex gap-2 animate-in fade-in duration-300"><AlertTriangle className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
-            if (line.startsWith('- ✅') || line.includes('✅')) return <div key={i} className="text-emerald-600 flex gap-2 animate-in fade-in duration-300"><CheckCircle className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
-            if (line.startsWith('- 💧') || line.includes('💧')) return <div key={i} className="text-blue-600 flex gap-2 animate-in fade-in duration-300"><Zap className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
-            if (line.startsWith('- 🚀') || line.includes('🚀')) return <div key={i} className="text-purple-600 flex gap-2 animate-in fade-in duration-300"><Activity className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- 🚨') || line.includes('🚨')) return <div key={i} className="text-red-400 font-bold flex gap-2 animate-in fade-in duration-300 bg-red-900/20 p-2 rounded"><AlertOctagon className="w-4 h-4 mt-0.5 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- ⚠️') || line.includes('⚠️')) return <div key={i} className="text-amber-400 flex gap-2 animate-in fade-in duration-300"><AlertTriangle className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- ✅') || line.includes('✅')) return <div key={i} className="text-[#14F195] flex gap-2 animate-in fade-in duration-300"><CheckCircle className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- 💧') || line.includes('💧')) return <div key={i} className="text-blue-400 flex gap-2 animate-in fade-in duration-300"><Zap className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- 🚀') || line.includes('🚀')) return <div key={i} className="text-purple-400 flex gap-2 animate-in fade-in duration-300"><Activity className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
             
-            return <div key={i} className="animate-in fade-in duration-300 pl-4 border-l-2 border-slate-200 ml-1">{line.replace('- ', '')}</div>;
+            return <div key={i} className="animate-in fade-in duration-300 pl-4 border-l-2 border-slate-700 ml-1">{line.replace('- ', '')}</div>;
         })}
     </div>
   );
@@ -628,32 +628,32 @@ function TokenAnalysis({ result }: { result: any }) {
     return (
         <div ref={containerRef} className="space-y-6 min-w-[300px] md:min-w-[650px] max-w-[800px] font-sans">
             {/* 1. Header with Logo & Big Price */}
-            <div className="flex flex-col md:flex-row md:items-center gap-6 pb-6 border-b border-slate-200">
+            <div className="flex flex-col md:flex-row md:items-center gap-6 pb-6 border-b border-[#14F195]/20">
                 <div className="flex items-center gap-4">
                      <div className="relative">
-                        <div className="absolute inset-0 bg-emerald-500 blur opacity-20 rounded-full"></div>
+                        <div className="absolute inset-0 bg-[#14F195] blur opacity-20 rounded-full"></div>
                         {marketData?.imageUrl ? (
-                            <img src={marketData.imageUrl} alt="Logo" className="relative w-16 h-16 rounded-full ring-2 ring-slate-200 shadow-xl object-cover" />
+                            <img src={marketData.imageUrl} alt="Logo" className="relative w-16 h-16 rounded-full ring-2 ring-slate-800 shadow-xl object-cover" />
                         ) : (
-                            <div className="relative w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-2xl ring-2 ring-slate-200 shadow-xl">🪙</div>
+                            <div className="relative w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center text-2xl ring-2 ring-slate-800 shadow-xl">🪙</div>
                         )}
                         {/* Live Indicator */}
                         <div className={clsx(
                             "absolute -top-1 -right-1 w-3 h-3 rounded-full border border-white transition-colors duration-500",
-                            isUpdating ? "bg-yellow-400" : "bg-emerald-500 animate-pulse"
+                            isUpdating ? "bg-yellow-400" : "bg-[#14F195] animate-pulse"
                         )} title="Live updates active"></div>
                     </div>
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                             <h2 className="text-xl font-bold text-slate-900">{marketData?.name || "Unknown"}</h2>
+                             <h2 className="text-xl font-bold text-white">{marketData?.name || "Unknown"}</h2>
                              {result.address.startsWith('0x') ? (
-                                <span className="bg-blue-500/10 text-blue-600 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-200">BASE</span>
+                                <span className="bg-blue-500/10 text-blue-400 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-500/20">BASE</span>
                              ) : (
-                                <span className="bg-emerald-500/10 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-200">SOL</span>
+                                <span className="bg-[#14F195]/10 text-[#14F195] text-[10px] font-bold px-2 py-0.5 rounded border border-[#14F195]/20">SOL</span>
                              )}
                              <span className="text-slate-500 text-sm font-mono">{marketData?.symbol}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-slate-500 font-mono bg-slate-100 px-2 py-1 rounded border border-slate-200 cursor-pointer hover:border-emerald-500/50 transition-colors"
+                        <div className="flex items-center gap-2 text-xs text-slate-400 font-mono bg-slate-800/50 px-2 py-1 rounded border border-slate-700 cursor-pointer hover:border-[#14F195]/50 transition-colors"
                              onClick={() => navigator.clipboard.writeText(result.address)}>
                             {result.address.slice(0, 6)}...{result.address.slice(-6)}
                             <FileText className="w-3 h-3" />
@@ -664,15 +664,15 @@ function TokenAnalysis({ result }: { result: any }) {
                 {/* Big Price Display */}
                 <div className="md:ml-auto">
                     <div className="flex items-baseline gap-3">
-                        <div className="text-4xl md:text-5xl font-bold text-slate-900 font-mono tracking-tighter">
+                        <div className="text-4xl md:text-5xl font-bold text-white font-mono tracking-tighter">
                             ${formatPrice(marketData?.priceUsd || 0)}
                         </div>
                         {marketData?.priceChange24h !== undefined && (
                              <div className={clsx(
                                 "text-lg font-bold flex items-center gap-1",
-                                marketData.priceChange24h >= 0 ? "text-emerald-600" : "text-red-600"
+                                marketData.priceChange24h >= 0 ? "text-[#14F195]" : "text-red-500"
                             )}>
-                                {formatPct(marketData.priceChange24h)} <span className="text-xs text-slate-400 font-normal">(24h)</span>
+                                {formatPct(marketData.priceChange24h)} <span className="text-xs text-slate-500 font-normal">(24h)</span>
                             </div>
                         )}
                     </div>
@@ -680,9 +680,9 @@ function TokenAnalysis({ result }: { result: any }) {
             </div>
 
             {/* 3. AI Analysis Text */}
-            <div className="bg-purple-50 p-4 rounded-xl border border-purple-100 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1 h-full bg-purple-400"></div>
-                <h3 className="text-sm font-bold text-purple-600 mb-3 flex items-center gap-2 uppercase tracking-wider">
+            <div className="bg-purple-900/10 p-4 rounded-xl border border-purple-500/20 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+                <h3 className="text-sm font-bold text-purple-400 mb-3 flex items-center gap-2 uppercase tracking-wider">
                     <Bot className="w-4 h-4" /> AI Analysis
                 </h3>
                 <TypewriterEffect text={result.aiAnalysis} />
@@ -691,7 +691,7 @@ function TokenAnalysis({ result }: { result: any }) {
             {/* 4. Security & Holders Split */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Security Checks</h4>
+                    <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Security Checks</h4>
                     <div className="space-y-2">
                         <CheckItem label="Mint Disabled" status={result.checks.mintDisabled} description="Owner cannot mint new tokens" />
                         <CheckItem label="Freeze Disabled" status={result.checks.lpBurned} description="Owner cannot freeze your funds" />
@@ -703,7 +703,7 @@ function TokenAnalysis({ result }: { result: any }) {
 
             {/* 5. External Links - Only show if URL exists or High Value */}
             {(marketData?.externalUrl || marketData?.searchUrl) && (
-                <a href={marketData.externalUrl || marketData.searchUrl} target="_blank" className="block w-full bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 p-4 rounded-xl text-center transition-all group">
+                <a href={marketData.externalUrl || marketData.searchUrl} target="_blank" className="block w-full bg-blue-900/10 hover:bg-blue-900/20 border border-blue-500/20 hover:border-blue-500/40 p-4 rounded-xl text-center transition-all group">
                     <div className="flex items-center justify-center gap-2 text-blue-600 font-bold text-lg mb-1">
                         <Globe className="w-5 h-5 fill-current" />
                         {marketData.externalUrl 
@@ -753,18 +753,18 @@ function CheckItem({ label, status, description }: { label: string, status: bool
     <div className={clsx(
       "flex items-center gap-3 p-2 rounded border transition-all duration-300",
       status 
-        ? "bg-emerald-50 border-emerald-100" 
-        : "bg-red-50 border-red-100"
+        ? "bg-[#14F195]/10 border-[#14F195]/20" 
+        : "bg-red-900/10 border-red-500/20"
     )}>
       <div className={clsx(
         "p-1 rounded-full flex-shrink-0",
-        status ? "bg-emerald-100 text-emerald-600" : "bg-red-100 text-red-600"
+        status ? "bg-[#14F195]/20 text-[#14F195]" : "bg-red-900/20 text-red-500"
       )}>
         {status ? <CheckCircle className="w-3 h-3" /> : <AlertTriangle className="w-3 h-3" />}
       </div>
       <div className="flex flex-col">
-        <span className={clsx("font-medium text-xs", status ? "text-slate-700" : "text-slate-700")}>{label}</span>
-        {description && <span className="text-[10px] text-slate-500">{description}</span>}
+        <span className={clsx("font-medium text-xs", status ? "text-slate-200" : "text-slate-200")}>{label}</span>
+        {description && <span className="text-[10px] text-slate-400">{description}</span>}
       </div>
     </div>
   );
@@ -792,17 +792,17 @@ function StatsModule() {
   }, []);
 
   return (
-    <div className="bg-white/50 backdrop-blur-sm border border-slate-200 rounded-xl p-4 flex flex-col gap-4 relative overflow-hidden shadow-sm">
+    <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 flex flex-col gap-4 relative overflow-hidden shadow-lg">
         <div className="absolute top-0 right-0 p-2 opacity-5">
-            <BarChart3 className="w-20 h-20" />
+            <BarChart3 className="w-20 h-20 text-white" />
         </div>
         
-        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-2 relative z-10">Threat_Intel</h3>
+        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-700 pb-2 relative z-10">Threat_Intel</h3>
 
         <div className="space-y-4 relative z-10">
             <div>
-                <div className="text-[10px] text-emerald-600 uppercase font-bold mb-1">Total Scans</div>
-                <div className="text-2xl font-mono font-bold text-slate-900 tracking-tighter">
+                <div className="text-[10px] text-[#14F195] uppercase font-bold mb-1">Total Scans</div>
+                <div className="text-2xl font-mono font-bold text-white tracking-tighter">
                     {scans.toLocaleString()}
                 </div>
             </div>
@@ -846,26 +846,26 @@ function RightActivityPanel() {
     }, []);
 
     return (
-        <div className="bg-white/50 backdrop-blur-sm border border-slate-200 rounded-xl flex-1 p-4 flex flex-col relative overflow-hidden shadow-sm">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-2 mb-4">Live_Intercepts</h3>
+        <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl flex-1 p-4 flex flex-col relative overflow-hidden shadow-lg">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">Live_Intercepts</h3>
             
             <div className="space-y-2 flex-1 overflow-hidden relative">
-                <div className="absolute left-1.5 top-0 bottom-0 w-px bg-slate-200"></div>
+                <div className="absolute left-1.5 top-0 bottom-0 w-px bg-slate-700"></div>
                 
                 {activities.map((item, i) => (
                     <div key={i} className="relative pl-6 animate-in slide-in-from-right-4 duration-300">
                         <div className={clsx(
-                            "absolute left-0 top-1.5 w-3 h-3 rounded-full border-2 border-white",
+                            "absolute left-0 top-1.5 w-3 h-3 rounded-full border-2 border-slate-900",
                             item.risk === 'HIGH' ? 'bg-red-500' : 
-                            item.risk === 'MEDIUM' ? 'bg-yellow-500' : 'bg-emerald-500'
+                            item.risk === 'MEDIUM' ? 'bg-yellow-500' : 'bg-[#14F195]'
                         )}></div>
                         
-                        <div className="flex items-center justify-between text-xs p-2 bg-white rounded border border-slate-200 hover:border-emerald-500/30 transition-colors shadow-sm">
-                            <div className="font-mono font-bold text-slate-700">${item.token}</div>
+                        <div className="flex items-center justify-between text-xs p-2 bg-slate-800 border border-slate-700 hover:border-[#14F195]/30 transition-colors shadow-sm rounded">
+                            <div className="font-mono font-bold text-slate-200">${item.token}</div>
                             <div className={clsx(
                                 "text-[9px] font-bold px-1.5 rounded",
-                                item.risk === 'HIGH' ? 'text-red-600 bg-red-100' : 
-                                item.risk === 'MEDIUM' ? 'text-yellow-600 bg-yellow-100' : 'text-emerald-600 bg-emerald-100'
+                                item.risk === 'HIGH' ? 'text-red-400 bg-red-900/20' : 
+                                item.risk === 'MEDIUM' ? 'text-yellow-400 bg-yellow-900/20' : 'text-[#14F195] bg-[#14F195]/10'
                             )}>{item.risk}</div>
                         </div>
                     </div>
