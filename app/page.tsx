@@ -238,7 +238,7 @@ export default function Home() {
         className="flex items-center gap-2 px-3 py-1.5 bg-[#14F195]/5 hover:bg-[#14F195]/10 border border-[#14F195]/30 rounded text-[#14F195] text-xs font-bold transition-all hover:shadow-[0_0_15px_rgba(20,241,149,0.1)] hover:border-[#14F195]/60"
     >
         <Info className="w-3 h-3" />
-        <span className="hidden sm:inline">SYSTEM_INFO</span>
+        <span className="hidden sm:inline">About & Roadmap</span>
     </button>
   </header>
 
