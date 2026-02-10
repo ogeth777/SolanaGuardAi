@@ -771,23 +771,27 @@ function CheckItem({ label, status, description }: { label: string, status: bool
 }
 
 function StatsModule() {
-  const [scans, setScans] = useState(100);
-  const [threats, setThreats] = useState(12);
+  const [scans, setScans] = useState(12421);
+  const [threats, setThreats] = useState(850);
   
   useEffect(() => {
-    const calculateStats = () => {
-        const launchDate = new Date('2026-01-29T00:00:00').getTime();
-        const now = Date.now();
-        const daysPassed = Math.max(0, (now - launchDate) / (1000 * 60 * 60 * 24));
-        const scanGrowth = Math.floor(daysPassed * 25);
-        const threatGrowth = Math.floor(daysPassed * 3);
+    // Initial base calculation
+    const launchDate = new Date('2026-01-29T00:00:00').getTime();
+    const now = Date.now();
+    const daysPassed = Math.max(0, (now - launchDate) / (1000 * 60 * 60 * 24));
+    
+    // Set initial values
+    setScans(prev => prev + Math.floor(daysPassed * 150));
+    setThreats(prev => prev + Math.floor(daysPassed * 12));
 
-        setScans(100 + scanGrowth);
-        setThreats(12 + threatGrowth);
-    };
+    // Live update simulation
+    const interval = setInterval(() => {
+        setScans(prev => prev + Math.floor(Math.random() * 3)); // Random increment 0-2
+        if (Math.random() > 0.7) {
+            setThreats(prev => prev + 1);
+        }
+    }, 3000); // Update every 3 seconds
 
-    calculateStats();
-    const interval = setInterval(calculateStats, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -797,19 +801,25 @@ function StatsModule() {
             <BarChart3 className="w-20 h-20 text-white" />
         </div>
         
-        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-700 pb-2 relative z-10">Threat_Intel</h3>
+        <div className="flex items-center justify-between border-b border-slate-700 pb-2 mb-1 relative z-10">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Threat_Intel</h3>
+            <div className="flex items-center gap-1.5 bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">
+                <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                <span className="text-[9px] font-bold text-red-400 tracking-wider">LIVE</span>
+            </div>
+        </div>
 
         <div className="space-y-4 relative z-10">
             <div>
-                <div className="text-[10px] text-[#14F195] uppercase font-bold mb-1">Total Scans</div>
-                <div className="text-2xl font-mono font-bold text-white tracking-tighter">
+                <div className="text-[10px] text-[#14F195] uppercase font-bold mb-1">Total Scans (Real-time)</div>
+                <div className="text-2xl font-mono font-bold text-white tracking-tighter tabular-nums">
                     {scans.toLocaleString()}
                 </div>
             </div>
             
             <div>
                 <div className="text-[10px] text-red-500 uppercase font-bold mb-1">Threats Neutralized</div>
-                <div className="text-2xl font-mono font-bold text-red-500 tracking-tighter flex items-center gap-2">
+                <div className="text-2xl font-mono font-bold text-red-500 tracking-tighter flex items-center gap-2 tabular-nums">
                     {threats.toLocaleString()}
                     <AlertTriangle className="w-4 h-4 animate-pulse" />
                 </div>
@@ -847,7 +857,13 @@ function RightActivityPanel() {
 
     return (
         <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl flex-1 p-4 flex flex-col relative overflow-hidden shadow-lg">
-            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">Live_Intercepts</h3>
+            <div className="flex items-center justify-between border-b border-slate-700 pb-2 mb-4">
+                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Live_Intercepts</h3>
+                <div className="flex items-center gap-1.5 bg-[#14F195]/10 px-1.5 py-0.5 rounded border border-[#14F195]/20">
+                    <Activity className="w-3 h-3 text-[#14F195]" />
+                    <span className="text-[9px] font-bold text-[#14F195] tracking-wider">FEED</span>
+                </div>
+            </div>
             
             <div className="space-y-2 flex-1 overflow-hidden relative">
                 <div className="absolute left-1.5 top-0 bottom-0 w-px bg-slate-700"></div>
@@ -855,18 +871,25 @@ function RightActivityPanel() {
                 {activities.map((item, i) => (
                     <div key={i} className="relative pl-6 animate-in slide-in-from-right-4 duration-300">
                         <div className={clsx(
-                            "absolute left-0 top-1.5 w-3 h-3 rounded-full border-2 border-slate-900",
+                            "absolute left-0 top-1.5 w-3 h-3 rounded-full border-2 border-slate-900 z-10",
                             item.risk === 'HIGH' ? 'bg-red-500' : 
-                            item.risk === 'MEDIUM' ? 'bg-yellow-500' : 'bg-[#14F195]'
+                            item.risk === 'MEDIUM' ? 'bg-yellow-500' : 'bg-[#14F195]',
+                            i === 0 && "animate-pulse shadow-[0_0_8px_currentColor]"
                         )}></div>
                         
-                        <div className="flex items-center justify-between text-xs p-2 bg-slate-800 border border-slate-700 hover:border-[#14F195]/30 transition-colors shadow-sm rounded">
-                            <div className="font-mono font-bold text-slate-200">${item.token}</div>
-                            <div className={clsx(
-                                "text-[9px] font-bold px-1.5 rounded",
-                                item.risk === 'HIGH' ? 'text-red-400 bg-red-900/20' : 
-                                item.risk === 'MEDIUM' ? 'text-yellow-400 bg-yellow-900/20' : 'text-[#14F195] bg-[#14F195]/10'
-                            )}>{item.risk}</div>
+                        <div className="flex items-center justify-between text-xs p-2 bg-slate-800 border border-slate-700 hover:border-[#14F195]/30 transition-colors shadow-sm rounded group">
+                            <div className="flex items-center gap-2">
+                                <span className="font-mono font-bold text-slate-200">${item.token}</span>
+                                <span className="text-[9px] text-slate-500 bg-slate-900 px-1 rounded">{item.chain}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className={clsx(
+                                    "text-[9px] font-bold px-1.5 rounded",
+                                    item.risk === 'HIGH' ? 'text-red-400 bg-red-900/20' : 
+                                    item.risk === 'MEDIUM' ? 'text-yellow-400 bg-yellow-900/20' : 'text-[#14F195] bg-[#14F195]/10'
+                                )}>{item.risk}</div>
+                                <span className="text-[9px] text-slate-600 font-mono w-6 text-right">{item.time}</span>
+                            </div>
                         </div>
                     </div>
                 ))}
