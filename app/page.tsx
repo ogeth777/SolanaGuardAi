@@ -252,9 +252,9 @@ export default function Home() {
 
                  <div className="mt-auto pt-4 border-t border-[#14F195]/10">
                      <div className="text-[10px] text-slate-600 font-mono">
-                        > NODE_SYNC: 100%<br/>
-                        > MEMPOOL: NORMAL<br/>
-                        > ORACLE: CONNECTED
+                        &gt; NODE_SYNC: 100%<br/>
+                        &gt; MEMPOOL: NORMAL<br/>
+                        &gt; ORACLE: CONNECTED
                      </div>
                  </div>
              </div>
@@ -410,8 +410,8 @@ export default function Home() {
                                     <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#14F195] rounded-full shadow-[0_0_10px_#14F195]"></div>
                                     <div className="text-white font-bold mb-1">PHASE 1: GENESIS [COMPLETE]</div>
                                     <div className="text-slate-400">
-                                        > CORE_SCANNER_INIT<br/>
-                                        > CMC_INTEGRATION_ONLINE
+                                        &gt; CORE_SCANNER_INIT<br/>
+                                        &gt; CMC_INTEGRATION_ONLINE
                                     </div>
                                 </div>
                                 
@@ -428,9 +428,9 @@ export default function Home() {
                                     <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#9945FF] rounded-full animate-pulse"></div>
                                     <div className="text-[#9945FF] font-bold mb-1">PHASE 3: MULTI-CHAIN [PENDING]</div>
                                     <div className="text-slate-500">
-                                        > ETH_MAINNET_BRIDGE<br/>
-                                        > ARB_OPTIMISM_NODES<br/>
-                                        > BSC_SCANNER_BETA
+                                        &gt; ETH_MAINNET_BRIDGE<br/>
+                                        &gt; ARB_OPTIMISM_NODES<br/>
+                                        &gt; BSC_SCANNER_BETA
                                     </div>
                                 </div>
                             </div>
