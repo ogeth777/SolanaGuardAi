@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --background: #030014; /* Deep Space Blue */
-  --foreground: #f8fafc;
-  --solana-green: #14F195;
+  --background: #f8fafc; /* Slate 50 - Light Background */
+  --foreground: #0f172a; /* Slate 900 - Dark Text */
+  --solana-green: #10b981; /* Darker Green for Light Mode readability */
   --solana-purple: #9945FF;
 }
 
@@ -13,8 +13,8 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(153, 69, 255, 0.15), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(20, 241, 149, 0.15), transparent 25%);
+    radial-gradient(circle at 15% 50%, rgba(153, 69, 255, 0.05), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.05), transparent 25%);
   overflow-x: hidden;
 }
 
@@ -22,8 +22,8 @@ body {
 .cyber-grid {
   background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(20, 241, 149, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(153, 69, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(153, 69, 255, 0.05) 1px, transparent 1px);
   position: relative;
 }
 
@@ -31,33 +31,22 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, #030014 90%);
+  background: radial-gradient(circle at center, transparent 0%, #f8fafc 90%);
   pointer-events: none;
 }
 
-/* CRT Scanline Effect */
+/* CRT Scanline Effect - Disabled for Light Mode clarity */
 .crt-overlay {
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.1) 50%
-  );
-  background-size: 100% 4px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 5;
-  opacity: 0.3;
+  display: none;
 }
 
 /* HUD Panel Styling */
 .hud-panel {
-  background: rgba(3, 7, 18, 0.6);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(20, 241, 149, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   position: relative;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   clip-path: polygon(
     0 0, 
     100% 0, 
@@ -74,13 +63,13 @@ body {
   right: 0;
   width: 15px;
   height: 1px;
-  background: #14F195;
+  background: #10b981;
   transform: rotate(-45deg);
   transform-origin: bottom right;
 }
 
 .hud-border-glow {
-  box-shadow: 0 0 15px rgba(20, 241, 149, 0.1);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
 }
 
 /* Animated Ticker */
