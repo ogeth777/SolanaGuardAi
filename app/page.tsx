@@ -661,7 +661,8 @@ function RightActivityPanel() {
     useEffect(() => {
         const tokens = [
             { s: 'SOL', c: 'SOL' }, { s: 'USDC', c: 'SOL' }, { s: 'RAY', c: 'SOL' }, { s: 'ORCA', c: 'SOL' },
-            { s: 'MYRO', c: 'SOL' }, { s: 'SAMO', c: 'SOL' }, { s: 'ANALOS', c: 'SOL' }, { s: 'SILLY', c: 'SOL' },
+            { s: 'MYRO', c: 'SOL' }, { s: 'BRETT', c: 'BASE' }, { s: 'DEGEN', c: 'BASE' }, { s: 'TOSHI', c: 'BASE' },
+            { s: 'AERO', c: 'BASE' }, { s: 'KEYCAT', c: 'BASE' }, { s: 'NORMIE', c: 'BASE' },
         ];
 
         const interval = setInterval(() => {
@@ -696,7 +697,11 @@ function RightActivityPanel() {
                                 <div>
                                     <div className="font-mono text-white font-bold tracking-wide leading-none">${item.token}</div>
                                     <div className="text-[9px] font-bold text-slate-400 mt-0.5 flex items-center gap-1">
-                                        <span className="text-[#14F195] bg-[#14F195]/10 px-1 rounded">SOLANA</span>
+                                        {item.chain === 'BASE' ? (
+                                            <span className="text-blue-400 bg-blue-500/10 px-1 rounded">BASE</span>
+                                        ) : (
+                                            <span className="text-[#14F195] bg-[#14F195]/10 px-1 rounded">SOLANA</span>
+                                        )}
                                     </div>
                                 </div>
                             </div>
