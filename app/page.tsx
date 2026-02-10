@@ -361,81 +361,142 @@ export default function Home() {
 
       {/* About Modal */}
       {showAbout && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-200">
-            <div className="hud-panel w-full max-w-2xl max-h-[90vh] overflow-y-auto relative shadow-[0_0_50px_rgba(20,241,149,0.15)]">
-                <button 
-                    onClick={() => setShowAbout(false)}
-                    className="absolute top-4 right-4 p-2 bg-slate-900/50 hover:bg-slate-800 rounded border border-slate-700 hover:border-[#14F195] text-slate-400 hover:text-white transition-all z-10"
-                >
-                    <X className="w-5 h-5" />
-                </button>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-in fade-in duration-200">
+            {/* Modal Container */}
+            <div className="w-full max-w-4xl bg-[#050a14] border border-[#14F195]/30 relative shadow-[0_0_100px_rgba(20,241,149,0.1)] overflow-hidden flex flex-col max-h-[90vh]">
+                
+                {/* Decorative Corners */}
+                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#14F195]"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#14F195]"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#14F195]"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#14F195]"></div>
 
-                <div className="p-8 space-y-8 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#14F195] to-transparent opacity-50"></div>
-                    
-                    {/* Header */}
-                    <div className="text-center space-y-2">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#14F195]/10 border border-[#14F195]/20 mb-4 shadow-[0_0_20px_rgba(20,241,149,0.2)]">
-                            <Shield className="w-8 h-8 text-[#14F195]" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-white tracking-widest uppercase font-mono">Mission Briefing</h2>
-                        <p className="text-[#14F195] font-mono text-xs tracking-wider">
-                            CLASSIFIED // SECURITY CLEARANCE: LEVEL 1
-                        </p>
+                {/* Modal Header */}
+                <div className="h-12 border-b border-[#14F195]/20 bg-[#14F195]/5 flex items-center justify-between px-6 shrink-0 relative">
+                    <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(20,241,149,0.05),transparent)] animate-ticker"></div>
+                    <div className="flex items-center gap-3 relative z-10">
+                        <Terminal className="w-4 h-4 text-[#14F195]" />
+                        <h2 className="font-mono font-bold text-[#14F195] tracking-[0.2em] text-sm">SYSTEM_KERNEL_INFO // V2.1</h2>
                     </div>
+                    <button 
+                        onClick={() => setShowAbout(false)}
+                        className="relative z-10 p-1.5 hover:bg-[#14F195]/20 rounded text-slate-500 hover:text-[#14F195] transition-colors group"
+                    >
+                        <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
+                    </button>
+                </div>
 
-                    {/* Content Grid */}
-                    <div className="grid gap-6">
-                        <div className="border border-[#14F195]/20 bg-[#14F195]/5 p-4 rounded relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-2 opacity-10">
-                                <Bot className="w-24 h-24" />
+                {/* Modal Content */}
+                <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar space-y-8 relative">
+                    {/* Background Grid */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(20,241,149,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(20,241,149,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+
+                    {/* Top Section: Identity */}
+                    <div className="grid md:grid-cols-[200px_1fr] gap-8 relative z-10">
+                        <div className="flex flex-col items-center justify-center p-6 bg-[#14F195]/5 border border-[#14F195]/20 rounded relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-[#14F195]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                            <Shield className="w-16 h-16 text-[#14F195] mb-4 drop-shadow-[0_0_15px_rgba(20,241,149,0.5)]" />
+                            <div className="text-center">
+                                <div className="text-white font-bold font-mono tracking-widest text-lg">SOLANA</div>
+                                <div className="text-[#14F195] font-bold font-mono tracking-widest text-lg">GUARD AI</div>
+                                <div className="mt-2 text-[10px] text-slate-500 font-mono border-t border-slate-800 pt-2">
+                                    BUILD: 2026.02.10<br/>
+                                    STATUS: OPERATIONAL
+                                </div>
                             </div>
-                            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                                <Terminal className="w-4 h-4 text-[#14F195]" /> OPERATIONAL OBJECTIVE
-                            </h3>
-                            <p className="text-slate-300 text-sm leading-relaxed font-mono">
-                                Solana Guard AI operates as an autonomous sentinel in the DeFi sector. 
-                                Primary directive: <span className="text-[#14F195]">Neutralize threats</span> via real-time contract auditing and heuristic analysis.
-                            </p>
                         </div>
-
-                        {/* Roadmap */}
+                        
                         <div className="space-y-4">
-                            <h3 className="text-lg font-bold text-[#9945FF] flex items-center gap-2 border-b border-[#9945FF]/20 pb-2">
-                                <Map className="w-4 h-4" /> TACTICAL ROADMAP
-                            </h3>
+                            <div>
+                                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                    <span className="w-1 h-4 bg-[#14F195]"></span>
+                                    Primary Directive
+                                </h3>
+                                <p className="text-slate-300 font-mono text-sm leading-relaxed border-l-2 border-slate-800 pl-4">
+                                    Autonomous sentinel designed for the <span className="text-white font-bold">Solana & Base</span> ecosystems. 
+                                    Utilizes real-time heuristic analysis to detect contract vulnerabilities, rug pulls, and liquidity anomalies before they execute.
+                                </p>
+                            </div>
                             
-                            <div className="space-y-4 pl-2 font-mono text-xs">
-                                <div className="relative pl-6 border-l border-[#14F195]">
-                                    <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#14F195] rounded-full shadow-[0_0_10px_#14F195]"></div>
-                                    <div className="text-white font-bold mb-1">PHASE 1: GENESIS [COMPLETE]</div>
-                                    <div className="text-slate-400">
-                                        &gt; CORE_SCANNER_INIT<br/>
-                                        &gt; CMC_INTEGRATION_ONLINE
-                                    </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="p-3 bg-slate-900/50 border border-slate-800 rounded">
+                                    <div className="text-[10px] text-slate-500 mb-1">SCAN_ENGINE</div>
+                                    <div className="text-[#14F195] font-mono font-bold">HEURISTIC_V3</div>
                                 </div>
-                                
-                                <div className="relative pl-6 border-l border-[#14F195]">
-                                    <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#14F195] rounded-full shadow-[0_0_10px_#14F195]"></div>
-                                    <div className="text-white font-bold mb-1">PHASE 2: EXPANSION [ACTIVE]</div>
-                                    <div className="text-slate-400">
-                                        &gt; BASE_CHAIN_UPLINK<br/>
-                                        &gt; HONEYPOT_HEURISTICS_V2
-                                    </div>
-                                </div>
-
-                                <div className="relative pl-6 border-l border-[#9945FF] opacity-80">
-                                    <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#9945FF] rounded-full animate-pulse"></div>
-                                    <div className="text-[#9945FF] font-bold mb-1">PHASE 3: MULTI-CHAIN [PENDING]</div>
-                                    <div className="text-slate-500">
-                                        &gt; ETH_MAINNET_BRIDGE<br/>
-                                        &gt; ARB_OPTIMISM_NODES<br/>
-                                        &gt; BSC_SCANNER_BETA
-                                    </div>
+                                <div className="p-3 bg-slate-900/50 border border-slate-800 rounded">
+                                    <div className="text-[10px] text-slate-500 mb-1">LATENCY</div>
+                                    <div className="text-[#14F195] font-mono font-bold">&lt; 50ms</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    {/* Middle Section: Roadmap */}
+                    <div className="relative z-10">
+                        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2 border-b border-slate-800 pb-2">
+                            <Map className="w-4 h-4" /> 
+                            Execution Roadmap
+                        </h3>
+                        
+                        <div className="grid md:grid-cols-3 gap-4">
+                            {/* Phase 1 */}
+                            <div className="relative p-4 border border-[#14F195]/30 bg-[#14F195]/5 rounded overflow-hidden">
+                                <div className="absolute top-0 right-0 px-2 py-1 bg-[#14F195] text-black text-[10px] font-bold">COMPLETE</div>
+                                <div className="text-[#14F195] font-bold text-lg mb-1">PHASE I</div>
+                                <div className="text-white text-xs font-bold mb-3 tracking-wider">GENESIS PROTOCOL</div>
+                                <ul className="space-y-1.5 text-[11px] font-mono text-slate-400">
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Core Scanner Init</li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> CMC Integration</li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Basic Heuristics</li>
+                                </ul>
+                            </div>
+
+                            {/* Phase 2 */}
+                            <div className="relative p-4 border border-blue-500/30 bg-blue-500/5 rounded overflow-hidden">
+                                <div className="absolute top-0 right-0 px-2 py-1 bg-blue-500 text-white text-[10px] font-bold animate-pulse">ACTIVE</div>
+                                <div className="text-blue-400 font-bold text-lg mb-1">PHASE II</div>
+                                <div className="text-white text-xs font-bold mb-3 tracking-wider">EXPANSION LAYER</div>
+                                <ul className="space-y-1.5 text-[11px] font-mono text-slate-400">
+                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-blue-400 animate-spin" /> Base Chain Uplink</li>
+                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-blue-400 animate-spin" /> Honeypot V2</li>
+                                    <li className="flex items-center gap-2"><span className="w-3 h-3 rounded-full border border-slate-600 flex items-center justify-center text-[8px] opacity-50">3</span> Multi-DEX Router</li>
+                                </ul>
+                            </div>
+
+                            {/* Phase 3 */}
+                            <div className="relative p-4 border border-purple-500/30 bg-purple-500/5 rounded overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
+                                <div className="absolute top-0 right-0 px-2 py-1 bg-purple-500/20 text-purple-300 text-[10px] font-bold">PENDING</div>
+                                <div className="text-purple-400 font-bold text-lg mb-1">PHASE III</div>
+                                <div className="text-white text-xs font-bold mb-3 tracking-wider">OMNI-CHAIN</div>
+                                <ul className="space-y-1.5 text-[11px] font-mono text-slate-500">
+                                    <li className="flex items-center gap-2 text-slate-500">&gt; ETH Mainnet Bridge</li>
+                                    <li className="flex items-center gap-2 text-slate-500">&gt; Arb/Optimism Nodes</li>
+                                    <li className="flex items-center gap-2 text-slate-500">&gt; BSC Scanner Beta</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer System Status */}
+                    <div className="grid grid-cols-4 gap-2 text-[10px] font-mono text-slate-600 border-t border-slate-800 pt-4 relative z-10">
+                        <div className="flex flex-col">
+                            <span>MEMORY_HEAP</span>
+                            <span className="text-[#14F195]">45% USED</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span>UPTIME</span>
+                            <span className="text-white">99.99%</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span>LAST_AUDIT</span>
+                            <span className="text-white">12 MIN AGO</span>
+                        </div>
+                        <div className="flex flex-col text-right">
+                            <span>SECURITY</span>
+                            <span className="text-[#14F195]">MAXIMUM</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
