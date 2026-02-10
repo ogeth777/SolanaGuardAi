@@ -28,3 +28,5 @@ ts-debug.log*
 
 # vercel
 .vercel
+
+agent_credentials.json
