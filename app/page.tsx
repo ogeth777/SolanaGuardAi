@@ -560,17 +560,21 @@ function TypewriterEffect({ text }: { text: string }) {
   }, [text]);
 
   return (
-    <div className="space-y-2 text-xs leading-relaxed text-slate-300 min-h-[60px] font-mono">
+    <div className="space-y-2 text-sm leading-relaxed text-slate-300 min-h-[60px]">
         {displayedText.split('\n').map((line: string, i: number) => {
             if (!line) return <div key={i} className="h-2"></div>;
-            if (line.startsWith('### ')) return <div key={i} className="text-sm font-bold text-[#14F195] pt-2 border-b border-[#14F195]/20 pb-1 mb-2 tracking-wider uppercase">{line.replace('### ', '')}</div>;
-            if (line.startsWith('#### ')) return <div key={i} className="text-xs font-bold text-slate-400 uppercase tracking-widest pt-2">{line.replace('#### ', '')}</div>;
-            if (line.startsWith('**')) return <div key={i} className="font-bold text-white pt-1">{line.replace(/\*\*/g, '')}</div>;
-            if (line.startsWith('- 🚨')) return <div key={i} className="text-red-400 font-bold flex gap-2 bg-red-500/5 p-1 rounded border border-red-500/10"><AlertOctagon className="w-3 h-3 mt-0.5 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
-            if (line.startsWith('- ⚠️') || line.includes('⚠️')) return <div key={i} className="text-yellow-400 flex gap-2"><AlertTriangle className="w-3 h-3 mt-0.5 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
-            if (line.startsWith('- ✅') || line.includes('✅')) return <div key={i} className="text-green-400 flex gap-2"><CheckCircle className="w-3 h-3 mt-0.5 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('### ')) return <div key={i} className="text-lg font-bold text-[#14F195] pt-2 animate-in fade-in duration-300 border-b border-[#14F195]/20 pb-1 mb-2">{line.replace('### ', '')}</div>;
+            if (line.startsWith('#### ')) return <div key={i} className="text-sm font-bold text-slate-400 uppercase tracking-widest pt-2 animate-in fade-in duration-300">{line.replace('#### ', '')}</div>;
+            if (line.startsWith('**')) return <div key={i} className="font-bold text-white pt-1 animate-in fade-in duration-300">{line.replace(/\*\*/g, '')}</div>;
             
-            return <div key={i} className="pl-4 border-l border-slate-800 ml-1">{line.replace('- ', '')}</div>;
+            // Risk/Safety Indicators with specific styling
+            if (line.startsWith('- 🚨') || line.includes('🚨')) return <div key={i} className="text-red-400 font-bold flex gap-2 animate-in fade-in duration-300 bg-red-500/10 p-2 rounded"><AlertOctagon className="w-4 h-4 mt-0.5 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- ⚠️') || line.includes('⚠️')) return <div key={i} className="text-yellow-400 flex gap-2 animate-in fade-in duration-300"><AlertTriangle className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- ✅') || line.includes('✅')) return <div key={i} className="text-green-400 flex gap-2 animate-in fade-in duration-300"><CheckCircle className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- 💧') || line.includes('💧')) return <div key={i} className="text-blue-400 flex gap-2 animate-in fade-in duration-300"><Zap className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            if (line.startsWith('- 🚀') || line.includes('🚀')) return <div key={i} className="text-purple-400 flex gap-2 animate-in fade-in duration-300"><Activity className="w-3 h-3 mt-1 flex-shrink-0" /> <span>{line.replace('- ', '')}</span></div>;
+            
+            return <div key={i} className="animate-in fade-in duration-300 pl-4 border-l-2 border-slate-800 ml-1">{line.replace('- ', '')}</div>;
         })}
     </div>
   );
@@ -628,74 +632,122 @@ function TokenAnalysis({ result }: { result: any }) {
     }, [isVisible, result.address, marketData]);
 
     return (
-        <div ref={containerRef} className="space-y-4 min-w-[300px] md:min-w-[600px] max-w-[800px]">
-            {/* Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800/50">
+        <div ref={containerRef} className="space-y-6 min-w-[300px] md:min-w-[650px] max-w-[800px] font-sans">
+            {/* 1. Header with Logo & Big Price */}
+            <div className="flex flex-col md:flex-row md:items-center gap-6 pb-6 border-b border-slate-700/50">
                 <div className="flex items-center gap-4">
-                    <div className="relative">
+                     <div className="relative">
+                        <div className="absolute inset-0 bg-[#14F195] blur opacity-20 rounded-full"></div>
                         {marketData?.imageUrl ? (
-                            <img src={marketData.imageUrl} alt="Logo" className="w-12 h-12 rounded border border-slate-700" />
+                            <img src={marketData.imageUrl} alt="Logo" className="relative w-16 h-16 rounded-full ring-2 ring-slate-700 shadow-xl object-cover" />
                         ) : (
-                            <div className="w-12 h-12 rounded bg-slate-800 flex items-center justify-center text-xl border border-slate-700">🪙</div>
+                            <div className="relative w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center text-2xl ring-2 ring-slate-700 shadow-xl">🪙</div>
                         )}
-                        {isUpdating && <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#14F195] rounded-full animate-ping"></div>}
+                        {/* Live Indicator */}
+                        <div className={clsx(
+                            "absolute -top-1 -right-1 w-3 h-3 rounded-full border border-slate-900 transition-colors duration-500",
+                            isUpdating ? "bg-yellow-400" : "bg-green-500 animate-pulse"
+                        )} title="Live updates active"></div>
                     </div>
                     <div>
-                        <div className="flex items-center gap-2">
-                             <h2 className="text-lg font-bold text-white tracking-wider">{marketData?.name || "Unknown"}</h2>
-                             <span className="text-[#14F195] text-[10px] border border-[#14F195]/30 px-1 rounded">{marketData?.symbol}</span>
+                        <div className="flex items-center gap-2 mb-1">
+                             <h2 className="text-xl font-bold text-white">{marketData?.name || "Unknown"}</h2>
+                             {result.address.startsWith('0x') ? (
+                                <span className="bg-blue-500/20 text-blue-500 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-500/30">BASE</span>
+                             ) : (
+                                <span className="bg-[#14F195]/20 text-[#14F195] text-[10px] font-bold px-2 py-0.5 rounded border border-[#14F195]/30">SOL</span>
+                             )}
+                             <span className="text-slate-500 text-sm font-mono">{marketData?.symbol}</span>
                         </div>
-                        <div className="text-xs text-slate-500 font-mono flex items-center gap-1 cursor-pointer hover:text-[#14F195]" onClick={() => navigator.clipboard.writeText(result.address)}>
-                            {result.address.slice(0, 8)}...{result.address.slice(-8)} <FileText className="w-3 h-3" />
+                        <div className="flex items-center gap-2 text-xs text-slate-400 font-mono bg-slate-950/30 px-2 py-1 rounded border border-slate-800/50 cursor-pointer hover:border-[#14F195]/50 transition-colors"
+                             onClick={() => navigator.clipboard.writeText(result.address)}>
+                            {result.address.slice(0, 6)}...{result.address.slice(-6)}
+                            <FileText className="w-3 h-3" />
                         </div>
                     </div>
                 </div>
                 
-                <div className="text-right">
-                    <div className="text-2xl font-bold text-white font-mono tracking-tighter">
-                        ${formatPrice(marketData?.priceUsd || 0)}
-                    </div>
-                    {marketData?.priceChange24h !== undefined && (
-                         <div className={clsx("text-xs font-bold", marketData.priceChange24h >= 0 ? "text-[#14F195]" : "text-red-500")}>
-                            {formatPct(marketData.priceChange24h)} (24h)
+                {/* Big Price Display */}
+                <div className="md:ml-auto">
+                    <div className="flex items-baseline gap-3">
+                        <div className="text-4xl md:text-5xl font-bold text-white font-mono tracking-tighter">
+                            ${formatPrice(marketData?.priceUsd || 0)}
                         </div>
-                    )}
+                        {marketData?.priceChange24h !== undefined && (
+                             <div className={clsx(
+                                "text-lg font-bold flex items-center gap-1",
+                                marketData.priceChange24h >= 0 ? "text-[#14F195]" : "text-red-500"
+                            )}>
+                                {formatPct(marketData.priceChange24h)} <span className="text-xs text-slate-500 font-normal">(24h)</span>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
 
-            {/* AI Analysis */}
-            <div className="bg-slate-950/50 p-3 rounded border border-[#9945FF]/20 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-[#9945FF]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                <h3 className="text-xs font-bold text-[#9945FF] mb-2 uppercase tracking-widest flex items-center gap-2">
-                    <Bot className="w-3 h-3" /> AI_RISK_ASSESSMENT
+            {/* 3. AI Analysis Text */}
+            <div className="bg-slate-950/30 p-4 rounded-xl border border-purple-500/20 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-purple-500/50"></div>
+                <h3 className="text-sm font-bold text-purple-400 mb-3 flex items-center gap-2 uppercase tracking-wider">
+                    <Bot className="w-4 h-4" /> AI Analysis
                 </h3>
                 <TypewriterEffect text={result.aiAnalysis} />
             </div>
 
-            {/* Security Checks Grid */}
-            <div className="grid grid-cols-2 gap-2">
-                <CheckItem label="MINT_AUTH" status={result.checks.mintDisabled} description="Minting disabled" />
-                <CheckItem label="FREEZE_AUTH" status={result.checks.lpBurned} description="Freeze disabled" />
-                <CheckItem label="METADATA" status={result.checks.metadataImmutable} description="Immutable" />
-                <CheckItem label="HONEYPOT" status={!result.isHoneypot} description="Tradeable" />
+            {/* 4. Security & Holders Split */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                    <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Security Checks</h4>
+                    <div className="space-y-2">
+                        <CheckItem label="Mint Disabled" status={result.checks.mintDisabled} description="Owner cannot mint new tokens" />
+                        <CheckItem label="Freeze Disabled" status={result.checks.lpBurned} description="Owner cannot freeze your funds" />
+                        <CheckItem label="Immutable" status={result.checks.metadataImmutable} description="Token metadata cannot be changed" />
+                        <CheckItem label="Not Honeypot" status={!result.isHoneypot} description="Token can be sold freely" />
+                    </div>
+
+                </div>
             </div>
 
-            {/* Footer Actions */}
+            {/* 5. External Links - Only show if URL exists or High Value */}
+            {(marketData?.externalUrl || marketData?.searchUrl) && (
+                <a href={marketData.externalUrl || marketData.searchUrl} target="_blank" className="block w-full bg-[#3861fb]/10 hover:bg-[#3861fb]/20 border border-[#3861fb]/30 hover:border-[#3861fb] p-4 rounded-xl text-center transition-all group">
+                    <div className="flex items-center justify-center gap-2 text-[#3861fb] font-bold text-lg mb-1">
+                        <Globe className="w-5 h-5 fill-current" />
+                        {marketData.externalUrl 
+                            ? `View on ${marketData.externalUrl.includes('coinmarketcap') ? 'CoinMarketCap' : 'CoinGecko'}`
+                            : 'Find on CoinMarketCap'
+                        }
+                    </div>
+                    <div className="text-xs text-[#3861fb]/50 font-mono">
+                        {marketData.externalUrl ? 'Official Listing' : 'Search via Google'}
+                    </div>
+                </a>
+            )}
+            
+            {/* 6. Footer Actions */}
             <div className="flex gap-2 pt-2">
                  <button 
                    onClick={() => {
-                     const text = `🛡️ SCAN_RESULT: ${result.marketData?.symbol}\nPRICE: $${result.marketData?.priceUsd}\nRISK_SCORE: ${100 - result.riskScore}/100\n\n>> Analyzed by SolanaGuardAI`;
+                     const text = `🛡️ Analysis for ${result.marketData?.symbol || 'Token'}\nPrice: $${result.marketData?.priceUsd}\nScore: ${100 - result.riskScore}/100\n\nScan by Solana Guard AI`;
                      navigator.clipboard.writeText(text);
                      setCopied(true);
                      setTimeout(() => setCopied(false), 2000);
                    }}
-                   className="flex-1 py-2 bg-[#14F195]/10 hover:bg-[#14F195]/20 border border-[#14F195]/30 rounded text-xs font-bold text-[#14F195] flex items-center justify-center gap-2 transition-all"
+                   className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-bold text-slate-300 flex items-center justify-center gap-2 transition-colors"
                  >
-                   {copied ? <CheckCircle className="w-3 h-3" /> : <FileText className="w-3 h-3" />}
-                   {copied ? 'COPIED' : 'COPY_LOG'}
+                   {copied ? <CheckCircle className="w-3 h-3 text-green-400" /> : <FileText className="w-3 h-3" />}
+                   {copied ? 'Copied!' : 'Copy Report'}
                  </button>
                  
-                 <a href={`https://solscan.io/token/${result.address}`} target="_blank" className="px-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded flex items-center justify-center text-slate-300">
+                 <a 
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`🛡️ Just scanned $${result.marketData?.symbol || 'Token'} on Solana Guard AI!\n\nSafety Score: ${100 - result.riskScore}/100\nChain: SOLANA 🟢\n\nCheck it here: https://solana-guard-ai.vercel.app`)}`}
+                    target="_blank"
+                    className="px-3 py-2 bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 text-[#1DA1F2] border border-[#1DA1F2]/30 rounded-lg transition-colors flex items-center justify-center"
+                 >
+                    <Twitter className="w-4 h-4" />
+                 </a>
+
+                 <a href={`https://solscan.io/token/${result.address}`} target="_blank" className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors flex items-center justify-center">
                     <ExternalLink className="w-4 h-4" />
                  </a>
             </div>
@@ -706,19 +758,20 @@ function TokenAnalysis({ result }: { result: any }) {
 function CheckItem({ label, status, description }: { label: string, status: boolean, description?: string }) {
   return (
     <div className={clsx(
-      "flex items-center gap-2 p-2 rounded border transition-all duration-300",
+      "flex items-center gap-3 p-2 rounded border transition-all duration-300",
       status 
-        ? "bg-green-500/5 border-green-500/20" 
-        : "bg-red-500/5 border-red-500/20"
+        ? "bg-green-500/5 border-green-500/10" 
+        : "bg-red-500/5 border-red-500/10"
     )}>
       <div className={clsx(
-        "p-0.5 rounded-full flex-shrink-0",
-        status ? "text-green-400" : "text-red-400"
+        "p-1 rounded-full flex-shrink-0",
+        status ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"
       )}>
         {status ? <CheckCircle className="w-3 h-3" /> : <AlertTriangle className="w-3 h-3" />}
       </div>
       <div className="flex flex-col">
-        <span className={clsx("font-bold text-[10px] uppercase tracking-wider", status ? "text-green-500" : "text-red-500")}>{label}</span>
+        <span className={clsx("font-medium text-xs", status ? "text-slate-300" : "text-slate-300")}>{label}</span>
+        {description && <span className="text-[10px] text-slate-500">{description}</span>}
       </div>
     </div>
   );
