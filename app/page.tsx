@@ -20,14 +20,44 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Auto-scroll on content resize (for typewriter effect)
+  useEffect(() => {
+    if (!chatContainerRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+        scrollToBottom();
+    });
+
+    observer.observe(chatContainerRef.current);
+
+    // Also observe subtree mutations for text updates
+    const mutationObserver = new MutationObserver(() => {
+        scrollToBottom();
+    });
+
+    mutationObserver.observe(chatContainerRef.current, { 
+        childList: true, 
+        subtree: true, 
+        characterData: true 
+    });
+
+    return () => {
+        observer.disconnect();
+        mutationObserver.disconnect();
+    };
+  }, []);
 
   // Initial Greeting
   useEffect(() => {
@@ -167,7 +197,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#030014] text-slate-300 font-mono text-sm overflow-hidden cyber-grid selection:bg-[#14F195]/30">
+    <div className="flex flex-col h-[100dvh] bg-[#030014] text-slate-300 font-mono text-sm overflow-hidden cyber-grid selection:bg-[#14F195]/30">
       <div className="crt-overlay pointer-events-none fixed inset-0 z-50"></div>
 
       {/* TOP HUD BAR */}
@@ -278,7 +308,7 @@ export default function Home() {
                   </div>
 
                   {/* Messages */}
-                  <div className="flex-1 overflow-y-auto p-4 space-y-6 scroll-smooth custom-scrollbar relative">
+                  <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 pb-8 space-y-6 scroll-smooth custom-scrollbar relative">
                       {/* Grid Background inside Terminal */}
                       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
                       
