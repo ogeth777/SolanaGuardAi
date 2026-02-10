@@ -181,7 +181,7 @@ export default function Home() {
       <RightActivityPanel />
 
       {/* Header */}
-      <header className="flex-none p-6 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md flex items-center justify-between z-20 relative shadow-2xl">
+      <header className="flex-none p-6 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-20 relative shadow-2xl">
         <div className="flex items-center gap-4">
             <div className="relative">
                 <div className="absolute inset-0 bg-[#14F195] blur opacity-60 rounded-full animate-pulse"></div>
@@ -194,7 +194,7 @@ export default function Home() {
 
         <button 
             onClick={() => setShowAbout(true)}
-            className="hidden md:flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 hover:border-[#14F195]/50 rounded-xl transition-all group"
+            className="hidden md:flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 hover:border-[#14F195]/50 rounded-xl transition-all group absolute right-6"
         >
             <Info className="w-4 h-4 text-[#14F195] group-hover:drop-shadow-[0_0_5px_rgba(20,241,149,0.8)]" />
             <span className="text-sm font-bold text-slate-300 group-hover:text-white">About & Roadmap</span>
