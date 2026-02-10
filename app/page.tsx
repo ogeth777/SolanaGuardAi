@@ -18,6 +18,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -180,7 +181,7 @@ export default function Home() {
       <RightActivityPanel />
 
       {/* Header */}
-      <header className="flex-none p-6 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-20 relative shadow-2xl">
+      <header className="flex-none p-6 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md flex items-center justify-between z-20 relative shadow-2xl">
         <div className="flex items-center gap-4">
             <div className="relative">
                 <div className="absolute inset-0 bg-[#14F195] blur opacity-60 rounded-full animate-pulse"></div>
@@ -190,7 +191,120 @@ export default function Home() {
                 <span>SOLANA GUARD <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14F195] to-[#9945FF] drop-shadow-[0_0_15px_rgba(153,69,255,0.5)]">AI</span></span>
             </h1>
         </div>
+
+        <button 
+            onClick={() => setShowAbout(true)}
+            className="hidden md:flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 hover:border-[#14F195]/50 rounded-xl transition-all group"
+        >
+            <Info className="w-4 h-4 text-[#14F195] group-hover:drop-shadow-[0_0_5px_rgba(20,241,149,0.8)]" />
+            <span className="text-sm font-bold text-slate-300 group-hover:text-white">About & Roadmap</span>
+        </button>
       </header>
+
+      {/* About Modal */}
+      {showAbout && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="bg-[#030014] border border-[#14F195]/20 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-[0_0_50px_rgba(20,241,149,0.1)] relative">
+                <button 
+                    onClick={() => setShowAbout(false)}
+                    className="absolute top-4 right-4 p-2 bg-slate-900/50 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors z-10"
+                >
+                    <X className="w-5 h-5" />
+                </button>
+
+                <div className="p-8 space-y-8">
+                    {/* Header */}
+                    <div className="text-center space-y-2">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#14F195]/10 border border-[#14F195]/20 mb-4">
+                            <Shield className="w-8 h-8 text-[#14F195]" />
+                        </div>
+                        <h2 className="text-3xl font-bold text-white tracking-tight">Project Vision</h2>
+                        <p className="text-slate-400 max-w-md mx-auto">
+                            Advanced AI-driven security analysis for the decentralized web.
+                        </p>
+                    </div>
+
+                    {/* About Section */}
+                    <div className="space-y-4">
+                        <h3 className="text-xl font-bold text-[#14F195] flex items-center gap-2">
+                            <Bot className="w-5 h-5" /> What is Solana Guard AI?
+                        </h3>
+                        <p className="text-slate-300 leading-relaxed text-sm">
+                            Solana Guard AI is an autonomous security agent designed to protect traders in the high-speed DeFi ecosystem. 
+                            Unlike traditional scanners, it uses a dual-core architecture:
+                        </p>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <li className="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                <strong className="text-white block mb-1">🔍 Deep Scan Core</strong>
+                                <span className="text-slate-400 text-xs">Analyzes smart contracts, liquidity locks, and holder distribution in milliseconds.</span>
+                            </li>
+                            <li className="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                <strong className="text-white block mb-1">🧠 Social Agent Core</strong>
+                                <span className="text-slate-400 text-xs">Understands context, community sentiment, and detects coordinated manipulation.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Roadmap Section */}
+                    <div className="space-y-6 pt-4 border-t border-slate-800/50">
+                        <h3 className="text-xl font-bold text-[#9945FF] flex items-center gap-2">
+                            <Map className="w-5 h-5" /> Project Roadmap
+                        </h3>
+                        
+                        <div className="relative space-y-0">
+                            {/* Line */}
+                            <div className="absolute left-4 top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#14F195] via-[#9945FF] to-slate-800"></div>
+
+                            {/* Phase 1 */}
+                            <div className="relative pl-12 pb-8">
+                                <div className="absolute left-2.5 top-1.5 w-3 h-3 bg-[#14F195] rounded-full shadow-[0_0_10px_#14F195] -translate-x-1/2"></div>
+                                <h4 className="text-white font-bold text-sm">Phase 1: Genesis (Completed)</h4>
+                                <ul className="mt-2 text-xs text-slate-400 space-y-1">
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Launch Solana Token Scanner</li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Integrate CoinGecko & CMC Verification</li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> AI Risk Analysis Engine v1.0</li>
+                                </ul>
+                            </div>
+
+                            {/* Phase 2 */}
+                            <div className="relative pl-12 pb-8">
+                                <div className="absolute left-2.5 top-1.5 w-3 h-3 bg-[#14F195] rounded-full shadow-[0_0_10px_#14F195] -translate-x-1/2"></div>
+                                <h4 className="text-white font-bold text-sm">Phase 2: Expansion (Live)</h4>
+                                <ul className="mt-2 text-xs text-slate-400 space-y-1">
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> <span className="text-white font-bold">Base Network Support</span></li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Enhanced Honeypot Detection</li>
+                                    <li className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-[#14F195]" /> Real-time Market Data Polling</li>
+                                </ul>
+                            </div>
+
+                            {/* Phase 3 */}
+                            <div className="relative pl-12 pb-8">
+                                <div className="absolute left-2.5 top-1.5 w-3 h-3 bg-[#9945FF] rounded-full shadow-[0_0_10px_#9945FF] -translate-x-1/2 animate-pulse"></div>
+                                <h4 className="text-white font-bold text-sm">Phase 3: Multi-Chain Horizon (In Progress)</h4>
+                                <ul className="mt-2 text-xs text-slate-400 space-y-1">
+                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-[#9945FF] animate-spin" /> Ethereum Mainnet Integration</li>
+                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-[#9945FF] animate-spin" /> Arbitrum & Optimism Support</li>
+                                    <li className="flex items-center gap-2"><Loader2 className="w-3 h-3 text-[#9945FF] animate-spin" /> BSC (Binance Smart Chain) Scanning</li>
+                                </ul>
+                            </div>
+
+                            {/* Phase 4 */}
+                            <div className="relative pl-12">
+                                <div className="absolute left-2.5 top-1.5 w-3 h-3 bg-slate-700 rounded-full border border-slate-500 -translate-x-1/2"></div>
+                                <h4 className="text-slate-400 font-bold text-sm">Phase 4: Autonomous Guardian</h4>
+                                <ul className="mt-2 text-xs text-slate-500 space-y-1">
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-600"></div> Automated Trading Protection Bot</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-600"></div> Portfolio Risk Scoring</li>
+                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-600"></div> Mobile App Launch</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+      )}
 
       {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6 scroll-smooth">
