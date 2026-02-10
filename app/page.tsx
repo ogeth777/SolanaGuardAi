@@ -69,7 +69,7 @@ export default function Home() {
             <div className="space-y-3">
                 <div className="flex items-center gap-2 border-b border-[#14F195]/20 pb-2 mb-2">
                     <Terminal className="w-4 h-4 text-[#14F195]" />
-                    <span className="text-[#14F195] font-bold font-mono text-sm tracking-wider">SYSTEM_INIT_COMPLETE</span>
+                    <span className="text-[#14F195] font-bold font-mono text-sm tracking-wider">SYSTEM INIT COMPLETE</span>
                 </div>
                 
                 <p>Greetings, Operator. <span className="text-[#14F195] font-bold">Solana Guard AI v2.1</span> is online.</p>
@@ -77,16 +77,16 @@ export default function Home() {
                 
                 <div className="grid grid-cols-2 gap-2 my-2">
                     <div className="bg-[#14F195]/5 border border-[#14F195]/20 p-2 rounded text-xs text-[#14F195] font-mono flex items-center gap-2">
-                        <Shield className="w-3 h-3" /> MINT_AUTH_SCAN
+                        <Shield className="w-3 h-3" /> MINT AUTH SCAN
                     </div>
                     <div className="bg-[#14F195]/5 border border-[#14F195]/20 p-2 rounded text-xs text-[#14F195] font-mono flex items-center gap-2">
-                        <Lock className="w-3 h-3" /> LIQUIDITY_CHECK
+                        <Lock className="w-3 h-3" /> LIQUIDITY CHECK
                     </div>
                     <div className="bg-[#14F195]/5 border border-[#14F195]/20 p-2 rounded text-xs text-[#14F195] font-mono flex items-center gap-2">
-                        <Users className="w-3 h-3" /> HOLDER_ANALYSIS
+                        <Users className="w-3 h-3" /> HOLDER ANALYSIS
                     </div>
                     <div className="bg-[#14F195]/5 border border-[#14F195]/20 p-2 rounded text-xs text-[#14F195] font-mono flex items-center gap-2">
-                        <Activity className="w-3 h-3" /> RUG_DETECTION
+                        <Activity className="w-3 h-3" /> RUG DETECTION
                     </div>
                 </div>
 
@@ -108,7 +108,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <p className="text-slate-500 text-xs mt-2 font-mono blink">_waiting_for_target_address...</p>
+                <p className="text-slate-500 text-xs mt-2 font-mono blink">Waiting for target address...</p>
             </div>
         ),
         timestamp: Date.now()
@@ -142,7 +142,7 @@ export default function Home() {
         content: (
             <div className="flex items-center gap-2 text-slate-400 font-mono text-sm">
                 <Loader2 className="w-4 h-4 animate-spin text-[#14F195]" /> 
-                <span className="animate-pulse">ESTABLISHING_UPLINK...</span>
+                <span className="animate-pulse">ESTABLISHING UPLINK...</span>
             </div>
         ), 
         timestamp: Date.now() 
@@ -189,8 +189,8 @@ export default function Home() {
             <div className="flex items-center gap-3 text-red-400 bg-red-900/10 p-4 rounded border border-red-500/30">
                 <AlertTriangle className="w-5 h-5 flex-shrink-0 animate-pulse" />
                 <div>
-                    <div className="font-bold font-mono tracking-wider">SCAN_FAILURE</div>
-                    <div className="text-xs opacity-80 font-mono">{err.message || "UPLINK_TERMINATED_UNEXPECTEDLY"}</div>
+                    <div className="font-bold font-mono tracking-wider">SCAN FAILURE</div>
+                    <div className="text-xs opacity-80 font-mono">{err.message || "UPLINK TERMINATED UNEXPECTEDLY"}</div>
                 </div>
             </div>
         )
@@ -220,15 +220,15 @@ export default function Home() {
     <div className="hidden md:flex items-center gap-8 text-[10px] text-slate-500 font-bold tracking-[0.2em]">
          <div className="flex items-center gap-2 text-[#14F195]">
             <span className="w-1.5 h-1.5 bg-[#14F195] rounded-full animate-pulse shadow-[0_0_8px_#14F195]"></span>
-            SYSTEM_ONLINE
+            SYSTEM ONLINE
          </div>
          <div className="flex items-center gap-2">
             <Cpu className="w-3 h-3" />
-            CORE_LOAD: 12%
+            CORE LOAD: 12%
          </div>
          <div className="flex items-center gap-2">
             <Network className="w-3 h-3" />
-            NET_LATENCY: 12ms
+            NET LATENCY: 12ms
          </div>
     </div>
 
@@ -252,7 +252,7 @@ export default function Home() {
              {/* Network Status Module */}
              <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl flex-1 p-4 flex flex-col relative overflow-hidden shadow-lg">
                  <div className="absolute inset-0 bg-[linear-gradient(rgba(20,241,149,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(20,241,149,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                 <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-800 pb-2 mb-4 relative z-10">Network_Nodes</h3>
+                 <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-800 pb-2 mb-4 relative z-10">Network Nodes</h3>
                  
                  <div className="space-y-3 relative z-10">
                     <div className="flex items-center justify-between p-2 bg-slate-900/80 border border-slate-800 rounded group hover:border-[#14F195]/30 transition-colors shadow-sm">
@@ -262,7 +262,7 @@ export default function Home() {
                                 <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-[#14F195] rounded-full border border-black"></div>
                             </div>
                             <div>
-                                <div className="text-white font-bold text-xs">SOLANA_MAIN</div>
+                                <div className="text-white font-bold text-xs">SOLANA MAIN</div>
                                 <div className="text-[10px] text-slate-500">TPS: 3,421</div>
                             </div>
                         </div>
@@ -276,7 +276,7 @@ export default function Home() {
                                 <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-[#14F195] rounded-full border border-black"></div>
                             </div>
                             <div>
-                                <div className="text-white font-bold text-xs">BASE_L2</div>
+                                <div className="text-white font-bold text-xs">BASE L2</div>
                                 <div className="text-[10px] text-slate-500">Block: 2.0s</div>
                             </div>
                         </div>
@@ -286,7 +286,7 @@ export default function Home() {
 
                  <div className="mt-auto pt-4 border-t border-slate-800">
                      <div className="text-[10px] text-slate-500 font-mono">
-                        &gt; NODE_SYNC: 100%<br/>
+                        &gt; NODE SYNC: 100%<br/>
                         &gt; MEMPOOL: NORMAL<br/>
                         &gt; ORACLE: CONNECTED
                      </div>
@@ -302,7 +302,7 @@ export default function Home() {
                   <div className="h-9 bg-slate-950/90 border-b border-[#14F195]/20 flex items-center justify-between px-3 shrink-0">
                       <div className="flex items-center gap-2">
                           <Terminal className="w-3 h-3 text-[#14F195]" />
-                          <span className="text-[10px] font-bold text-[#14F195] uppercase tracking-widest opacity-80">Main_Terminal.exe</span>
+                          <span className="text-[10px] font-bold text-[#14F195] uppercase tracking-widest opacity-80">Main Terminal</span>
                       </div>
                       <div className="flex gap-1.5 opacity-50">
                           <div className="w-2 h-2 rounded-full bg-slate-700"></div>
@@ -356,7 +356,7 @@ export default function Home() {
                         type="text"
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
-                        placeholder="ENTER_TARGET_ADDRESS..."
+                        placeholder="ENTER TARGET ADDRESS..."
                         className="flex-1 bg-transparent border-none text-[#14F195] px-2 py-3 focus:ring-0 placeholder-slate-700 font-mono text-sm tracking-wider uppercase"
                         disabled={loading}
                     />
@@ -377,7 +377,7 @@ export default function Home() {
                
                {/* Communication Link */}
                <div className="hud-panel p-4 space-y-3 shrink-0">
-                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-[#14F195]/20 pb-2 mb-2">Secure_Uplink</div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-[#14F195]/20 pb-2 mb-2">Secure Uplink</div>
                    <div className="grid grid-cols-2 gap-2">
                        <a href="https://t.me/lte777777" target="_blank" className="flex flex-col items-center justify-center p-3 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 hover:border-blue-500/40 rounded transition-all group">
                             <MessageCircle className="w-5 h-5 text-blue-400 mb-1 group-hover:scale-110 transition-transform" />
@@ -404,7 +404,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(20,241,149,0.1),transparent)] animate-ticker"></div>
                     <div className="flex items-center gap-3 relative z-10">
                         <Terminal className="w-4 h-4 text-[#14F195]" />
-                        <h2 className="font-mono font-bold text-[#14F195] tracking-[0.2em] text-sm">SYSTEM_KERNEL_INFO // V2.1</h2>
+                        <h2 className="font-mono font-bold text-[#14F195] tracking-[0.2em] text-sm">SYSTEM KERNEL INFO // V2.1</h2>
                     </div>
                     <button 
                         onClick={() => setShowAbout(false)}
@@ -448,8 +448,8 @@ export default function Home() {
                             
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="p-3 bg-slate-900/50 border border-slate-700 rounded">
-                                    <div className="text-[10px] text-slate-500 mb-1">SCAN_ENGINE</div>
-                                    <div className="text-[#14F195] font-mono font-bold">HEURISTIC_V3</div>
+                                    <div className="text-[10px] text-slate-500 mb-1">SCAN ENGINE</div>
+                                    <div className="text-[#14F195] font-mono font-bold">HEURISTIC V3</div>
                                 </div>
                                 <div className="p-3 bg-slate-900/50 border border-slate-700 rounded">
                                     <div className="text-[10px] text-slate-500 mb-1">LATENCY</div>
@@ -508,7 +508,7 @@ export default function Home() {
                     {/* Footer System Status */}
                     <div className="grid grid-cols-4 gap-2 text-[10px] font-mono text-slate-500 border-t border-slate-800 pt-4 relative z-10">
                         <div className="flex flex-col">
-                            <span>MEMORY_HEAP</span>
+                            <span>MEMORY HEAP</span>
                             <span className="text-[#14F195]">45% USED</span>
                         </div>
                         <div className="flex flex-col">
@@ -516,7 +516,7 @@ export default function Home() {
                             <span className="text-slate-200">99.99%</span>
                         </div>
                         <div className="flex flex-col">
-                            <span>LAST_AUDIT</span>
+                            <span>LAST AUDIT</span>
                             <span className="text-slate-200">12 MIN AGO</span>
                         </div>
                         <div className="flex flex-col text-right">
@@ -798,7 +798,7 @@ function StatsModule() {
         </div>
         
         <div className="flex items-center justify-between border-b border-slate-700 pb-2 mb-1 relative z-10">
-            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Threat_Intel</h3>
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Threat Intel</h3>
             <div className="flex items-center gap-1.5 bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">
                 <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
                 <span className="text-[9px] font-bold text-red-400 tracking-wider">LIVE</span>
@@ -854,7 +854,7 @@ function RightActivityPanel() {
     return (
         <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl flex-1 p-4 flex flex-col relative overflow-hidden shadow-lg">
             <div className="flex items-center justify-between border-b border-slate-700 pb-2 mb-4">
-                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Live_Intercepts</h3>
+                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Live Intercepts</h3>
                 <div className="flex items-center gap-1.5 bg-[#14F195]/10 px-1.5 py-0.5 rounded border border-[#14F195]/20">
                     <Activity className="w-3 h-3 text-[#14F195]" />
                     <span className="text-[9px] font-bold text-[#14F195] tracking-wider">FEED</span>
